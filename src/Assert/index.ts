@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { Macroable } from 'macroable'
 import { assert, Assertion, AssertionError } from 'chai'
 
 import { subsetCompare } from './utils'
@@ -23,7 +24,10 @@ import { AssertContract, ChaiAssert } from '../Contracts'
  * const assert = new Assert()
  * assert.deepEqual({ id: 1 }, { id: 1 })
  */
-export class Assert implements AssertContract {
+export class Assert extends Macroable implements AssertContract {
+  public static macros = {}
+  public static getters = {}
+
   /**
    * Tracking assertions
    */
