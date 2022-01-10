@@ -2,7 +2,15 @@
   "name": "@japa/assert",
   "version": "0.0.0",
   "description": "Assertion module for Japa",
-  "main": "index.js",
+  "main": "build/index.js",
+  "files": [
+    "build/src",
+    "build/index.d.ts",
+    "build/index.js"
+  ],
+  "exports": {
+    ".": "./build/index.js"
+  },
   "scripts": {
     "mrm": "mrm --preset=@adonisjs/mrm-preset",
     "pretest": "npm run lint",
@@ -58,11 +66,6 @@
     ],
     "runGhActionsOnWindows": false
   },
-  "files": [
-    "build/src",
-    "build/index.d.ts",
-    "build/index.js"
-  ],
   "eslintConfig": {
     "extends": [
       "plugin:adonis/typescriptPackage",
@@ -105,5 +108,9 @@
   "dependencies": {
     "@types/chai": "^4.3.0",
     "chai": "^4.3.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
   }
 }
