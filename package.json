@@ -113,5 +113,17 @@
   "publishConfig": {
     "access": "public",
     "tag": "latest"
-  }
+  },
+  "types": "./build/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/japa/assert.git"
+  },
+  "bugs": {
+    "url": "https://github.com/japa/assert/issues"
+  },
+  "homepage": "https://github.com/japa/assert#readme"
 }
