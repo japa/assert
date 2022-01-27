@@ -1,6 +1,6 @@
 {
   "name": "@japa/assert",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Assertion module for Japa",
   "main": "build/index.js",
   "files": [
