@@ -78,7 +78,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert[isOk](0)
-      }, 'expected 0 to be truthy')
+      }, 'expected +0 to be truthy')
 
       expectError(function () {
         assert[isOk]('')
@@ -119,7 +119,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isFalse(0)
-    }, 'expected 0 to be false')
+    }, 'expected +0 to be false')
   })
 
   test('isNotFalse', function () {
@@ -289,7 +289,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), Foo, 'blah')
-    }, 'blah: expected {} to not be an instance of Foo')
+    }, 'blah: expected Foo{} to not be an instance of Foo')
   })
 
   test('isObject', function () {
@@ -313,7 +313,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isObject(Foo)
-    }, 'expected [Function: Foo] to be an object')
+    }, 'expected [Function Foo] to be an object')
 
     expectError(function () {
       assert.isObject('foo')
@@ -397,7 +397,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.deepEqual(obj1, obj2)
-    }, `expected { tea: 'chai' } to deeply equal { tea: 'black' }`)
+    }, `expected {} to deeply equal {}`)
   })
 
   test('deepEqual (ordering)', function () {
@@ -454,7 +454,7 @@ test.group('assert', function () {
     expectError(function () {
       secondCircularObject.field2 = secondCircularObject
       assert.deepEqual(circularObject, secondCircularObject)
-    }, 'expected { field: [Circular] } to deeply equal { Object (field, field2) }')
+    }, 'expected { field: [Circular] } to deeply equal { field: [Circular], …(1) }')
   })
 
   test('notDeepEqual', function () {
@@ -753,7 +753,7 @@ test.group('assert', function () {
           ],
         }
       )
-    }, "expected { Object (id, name, ...) } to have property 'posts' of [ { title: 'Hello world' } ], but got [ { id: 1, title: 'Hello world' } ]")
+    }, "expected { id: 1, name: 'virk', …(1) } to have property 'posts' of [ { title: 'Hello world' } ], but got [ { id: 1, title: 'Hello world' } ]")
 
     if (typeof Symbol !== 'undefined' && typeof Symbol.toStringTag !== 'undefined') {
       var customObj = { a: 1 }
@@ -1387,7 +1387,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert.lengthOf(map, 3, 'blah')
-      }, 'blah: expected {} to have a size of 3 but got 2')
+      }, `blah: expected Map{ 'a' => 1, 'b' => 2 } to have a size of 3 but got 2`)
     }
 
     if (typeof Set === 'function') {
@@ -1401,7 +1401,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert.lengthOf(set, 3, 'blah')
-      }, 'blah: expected {} to have a size of 3 but got 2')
+      }, 'blah: expected Set{ 1, 2 } to have a size of 3 but got 2')
     }
   })
 
@@ -1680,13 +1680,13 @@ test.group('assert', function () {
       await assert.rejects(async function () {
         throw new Error('foo')
       }, TypeError)
-    }, 'expected [Function] to throw [Function: TypeError] but [Error: foo] was thrown')
+    }, 'expected [Function] to throw [Function TypeError] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {
         throw new Error('foo')
       }, 'bar')
-    }, "expected [Function] to throw error including 'bar' but got 'foo'")
+    }, `expected [Function] to throw error including 'bar' but got 'foo'`)
 
     await expectAsyncError(async function () {
       await assert.rejects(
@@ -1708,7 +1708,7 @@ test.group('assert', function () {
         'bar',
         'blah'
       )
-    }, 'blah: expected [Function] to throw [Function: TypeError] but [Error: foo] was thrown')
+    }, 'blah: expected [Function] to throw [Function TypeError] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {})
@@ -1932,25 +1932,25 @@ test.group('assert', function () {
       await assert.doesNotRejects(async function () {
         throw new Error('foo')
       })
-    }, 'expected [Function] to not throw an error but [Error: foo] was thrown')
+    }, 'expected [Function] to not throw an error but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(async function () {
         throw new CustomError('foo')
       })
-    }, 'expected [Function] to not throw an error but [CustomError: foo] was thrown')
+    }, 'expected [Function] to not throw an error but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(async function () {
         throw new Error('foo')
       }, Error)
-    }, 'expected [Function] to not throw [Function: Error] but [Error: foo] was thrown')
+    }, 'expected [Function] to not throw [Function Error] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(async function () {
         throw new CustomError('foo')
       }, CustomError as any)
-    }, 'expected [Function] to not throw [Function: CustomError] but [CustomError: foo] was thrown')
+    }, 'expected [Function] to not throw [Function CustomError] but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(async function () {
@@ -1973,7 +1973,7 @@ test.group('assert', function () {
         'foo',
         'blah'
       )
-    }, 'blah: expected [Function] to not throw [Function: Error] but [Error: foo] was thrown')
+    }, 'blah: expected [Function] to not throw [Function Error] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(
@@ -1984,13 +1984,13 @@ test.group('assert', function () {
         'foo',
         'blah'
       )
-    }, 'blah: expected [Function] to not throw [Function: CustomError] but [CustomError: foo] was thrown')
+    }, 'blah: expected [Function] to not throw [Function CustomError] but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(async function () {
         throw new Error('')
       }, '')
-    }, 'expected [Function] to not throw an error but [Error] was thrown')
+    }, 'expected [Function] to not throw an error but Error was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects(
@@ -2000,7 +2000,7 @@ test.group('assert', function () {
         Error,
         ''
       )
-    }, 'expected [Function] to not throw [Function: Error] but [Error] was thrown')
+    }, 'expected [Function] to not throw [Function Error] but Error was thrown')
 
     await expectAsyncError(async function () {
       await assert.doesNotRejects({} as any)
@@ -2236,7 +2236,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.includeMembers([5, 6], [5, 6, 0])
-    }, 'expected [ 5, 6 ] to be a superset of [ 5, 6, 0 ]')
+    }, 'expected [ 5, 6 ] to be a superset of [ 5, 6, +0 ]')
   })
 
   test('notIncludeMembers', function () {
@@ -2265,7 +2265,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.includeDeepMembers([{ e: 5 }, { f: 6 }], [{ e: 5 }, { f: 6 }, { z: 0 }])
-    }, 'expected [ { e: 5 }, { f: 6 } ] to be a superset of [ { e: 5 }, { f: 6 }, { z: 0 } ]')
+    }, 'expected [ { e: 5 }, { f: 6 } ] to be a superset of [ { e: 5 }, { f: 6 }, { z: +0 } ]')
   })
 
   test('notIncludeDeepMembers', function () {
@@ -2380,11 +2380,11 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isAbove(oneSecondAgo, now, 'blah')
-    }, 'blah: expected ' + oneSecondAgo.toUTCString() + ' to be above ' + now.toUTCString())
+    }, 'blah: expected ' + oneSecondAgo.toISOString() + ' to be above ' + now.toISOString())
 
     expectError(function () {
       assert.isAbove(now, now, 'blah')
-    }, 'blah: expected ' + now.toUTCString() + ' to be above ' + now.toUTCString())
+    }, 'blah: expected ' + now.toISOString() + ' to be above ' + now.toISOString())
 
     expectError(function () {
       assert.isAbove(null as any, now)
@@ -2413,16 +2413,16 @@ test.group('assert', function () {
     expectError(function () {
       assert.isAbove(oneSecondAgo, now, 'blah')
     }, 'blah: expected ' +
-      oneSecondAgo.toJSDate().toUTCString() +
+      oneSecondAgo.toJSDate().toISOString() +
       ' to be above ' +
-      now.toJSDate().toUTCString())
+      now.toJSDate().toISOString())
 
     expectError(function () {
       assert.isAbove(now, now, 'blah')
     }, 'blah: expected ' +
-      now.toJSDate().toUTCString() +
+      now.toJSDate().toISOString() +
       ' to be above ' +
-      now.toJSDate().toUTCString())
+      now.toJSDate().toISOString())
 
     expectError(function () {
       assert.isAbove(now, 1 as any, 'blah')
@@ -2464,7 +2464,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isAtLeast(now, oneSecondAfter, 'blah')
-    }, 'blah: expected ' + now.toUTCString() + ' to be at least ' + oneSecondAfter.toUTCString())
+    }, 'blah: expected ' + now.toISOString() + ' to be at least ' + oneSecondAfter.toISOString())
 
     expectError(function () {
       assert.isAtLeast(null as any, now, 'blah')
@@ -2514,11 +2514,11 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isBelow(now, oneSecondAgo, 'blah')
-    }, 'blah: expected ' + now.toUTCString() + ' to be below ' + oneSecondAgo.toUTCString())
+    }, 'blah: expected ' + now.toISOString() + ' to be below ' + oneSecondAgo.toISOString())
 
     expectError(function () {
       assert.isBelow(now, now)
-    }, 'expected ' + now.toUTCString() + ' to be below ' + now.toUTCString())
+    }, 'expected ' + now.toISOString() + ' to be below ' + now.toISOString())
 
     expectError(function () {
       assert.isBelow(null as any, now, 'blah')
@@ -2568,7 +2568,7 @@ test.group('assert', function () {
 
     expectError(function () {
       assert.isAtMost(oneSecondAfter, now, 'blah')
-    }, 'blah: expected ' + oneSecondAfter.toUTCString() + ' to be at most ' + now.toUTCString())
+    }, 'blah: expected ' + oneSecondAfter.toISOString() + ' to be at most ' + now.toISOString())
 
     expectError(function () {
       assert.isAtMost(null as any, now, 'blah')
@@ -2849,7 +2849,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert[isEmpty]({ arguments: 0 })
-      }, 'expected { arguments: 0 } to be empty')
+      }, 'expected { arguments: +0 } to be empty')
 
       expectError(function () {
         assert[isEmpty]({ foo: 'bar' })
@@ -2869,7 +2869,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert[isEmpty](0)
-      }, '.empty was passed non-string primitive 0')
+      }, '.empty was passed non-string primitive +0')
 
       expectError(function () {
         assert[isEmpty](1)
@@ -2937,7 +2937,7 @@ test.group('assert', function () {
 
         expectError(function () {
           assert[isNotEmpty](new Map())
-        }, 'expected {} not to be empty')
+        }, 'expected Map{} not to be empty')
       }
 
       if (typeof Set === 'function') {
@@ -2948,7 +2948,7 @@ test.group('assert', function () {
 
         expectError(function () {
           assert[isNotEmpty](new Set())
-        }, 'expected {} not to be empty')
+        }, 'expected Set{} not to be empty')
       }
 
       expectError(function () {
@@ -2961,7 +2961,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert[isNotEmpty](new FakeArgs())
-      }, 'expected { length: 0 } not to be empty')
+      }, 'expected FakeArgs{} not to be empty')
 
       expectError(function () {
         assert[isNotEmpty]({})
@@ -2981,7 +2981,7 @@ test.group('assert', function () {
 
       expectError(function () {
         assert[isNotEmpty](0)
-      }, '.empty was passed non-string primitive 0')
+      }, '.empty was passed non-string primitive +0')
 
       expectError(function () {
         assert[isNotEmpty](1)
