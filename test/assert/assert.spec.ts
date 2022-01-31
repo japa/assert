@@ -9,6 +9,7 @@
 
 import test from 'japa'
 import { DateTime } from 'luxon'
+import { EOL } from 'os'
 import { Assert } from '../../src/Assert'
 import { expectError, expectAsyncError } from '../../test-helpers'
 
@@ -3045,7 +3046,7 @@ test.group('fail', function () {
 })
 
 test.group('assertion planning', function () {
-  test('fail when planned assertions are over total assertions', function () {
+  test('fail when planned assertions are over total assertions', function (japaAssert) {
     const assert = new Assert()
     assert.plan(2)
 
@@ -3053,9 +3054,11 @@ test.group('assertion planning', function () {
       assert.fail(0, 1, 'this has failed')
     }, /this has failed/)
 
-    expectError(function () {
+    try {
       assert.assertions.validate()
-    }, 'Planned for 2 assertions, but ran 1')
+    } catch (error) {
+      japaAssert.match(error.stack.split(EOL)[2], /:3051/)
+    }
   })
 
   test('fail when planned assertions are under total assertions', function () {

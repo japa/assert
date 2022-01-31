@@ -34,9 +34,11 @@ export class Assert extends Macroable implements AssertContract {
   public assertions: {
     planned?: number
     total: number
+    mismatchError: null | Error
     validate(): void
   } = {
     total: 0,
+    mismatchError: null,
     validate() {
       if (this.planned === undefined) {
         return
@@ -45,7 +47,8 @@ export class Assert extends Macroable implements AssertContract {
       if (this.planned !== this.total) {
         const suffix = this.planned === 1 ? '' : 's'
         const message = `Planned for ${this.planned} assertion${suffix}, but ran ${this.total}`
-        throw new AssertionError(message)
+        this.mismatchError.message = message
+        throw this.mismatchError
       }
     },
   }
@@ -74,7 +77,13 @@ export class Assert extends Macroable implements AssertContract {
    * Plan assertions to expect by the end of this test
    */
   public plan(assertionsToExpect: number): this {
+    const error = new Error()
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(error)
+    }
+
     this.assertions.planned = assertionsToExpect
+    this.assertions.mismatchError = error
     return this
   }
 
