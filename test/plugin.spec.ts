@@ -8,26 +8,39 @@
  */
 
 import test from 'japa'
-import { Test, TestContext, Emitter, Refiner } from '@japa/core'
+import { Emitter, Refiner } from '@japa/core'
+import { TestContext, Test, Group } from '@japa/runner'
+
 import { assert, Assert } from '../index'
 
 test.group('Plugin', () => {
   test('add assert property to test context', (japaAssert) => {
-    assert()(TestContext, Test)
+    assert()({} as any, {} as any, { Test, TestContext, Group })
+
+    const emitter = new Emitter()
+    const refiner = new Refiner()
+    const getContext = (t: Test<any>) => new TestContext(t)
+
+    const testInstance = new Test('test 1', getContext, emitter, refiner)
+    testInstance.run(async (ctx) => {
+      ctx['assert'].plan(1)
+    })
 
     japaAssert.isTrue(TestContext.hasGetter('assert'))
-    japaAssert.instanceOf(new TestContext()['assert'], Assert)
+    japaAssert.instanceOf(getContext(testInstance)['assert'], Assert)
   })
 
   test('validate planned assertions', async (japaAssert, done) => {
     let testsCount = 0
-    assert()(TestContext, Test)
-
-    const getContext = () => new TestContext()
     const emitter = new Emitter()
     const refiner = new Refiner()
+    const getContext = (t: Test<any>) => new TestContext(t)
 
     const testInstance = new Test('test 1', getContext, emitter, refiner)
+    testInstance.run(async (ctx) => {
+      ctx['assert'].plan(1)
+    })
+
     testInstance.run(async (ctx) => {
       ctx['assert'].plan(1)
     })
@@ -61,13 +74,18 @@ test.group('Plugin', () => {
 
   test('do not validate assertions when test already has errors', async (japaAssert, done) => {
     let testsCount = 0
-    assert()(TestContext, Test)
-
-    const getContext = () => new TestContext()
     const emitter = new Emitter()
     const refiner = new Refiner()
+    const getContext = (t: Test<any>) => new TestContext(t)
 
     const testInstance = new Test('test 1', getContext, emitter, refiner)
+    testInstance.run(async (ctx) => {
+      ctx['assert'].plan(1)
+    })
+
+    japaAssert.isTrue(TestContext.hasGetter('assert'))
+    japaAssert.instanceOf(getContext(testInstance)['assert'], Assert)
+
     testInstance.run(async (ctx) => {
       ctx['assert'].plan(1)
       throw new Error('foo')

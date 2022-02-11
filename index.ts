@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import type { Test as TestContract, TestContext as TestContextContract } from '@japa/core'
+import type { PluginFn } from '@japa/runner'
 import { Assert } from './src/Assert'
 
 export * from './src/Contracts'
 export { Assert }
 
 /**
- * Plugin fn to register `assert` with the test context
+ * Plugin for "@japa/runner"
  */
-export function assert() {
-  return function (Context: typeof TestContextContract, Test: typeof TestContract) {
-    Context.getter('assert', () => new Assert(), true)
+export function assert(): PluginFn {
+  return function (_, __, { TestContext, Test }) {
+    TestContext.getter('assert', () => new Assert(), true)
     Test.dispose(function (test, hasError) {
       if (!hasError) {
         test.context.assert.assertions.validate()
