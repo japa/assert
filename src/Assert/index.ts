@@ -930,6 +930,7 @@ export class Assert extends Macroable implements AssertContract {
   public notDeepInclude(
     ...args: Parameters<ChaiAssert['notDeepInclude']>
   ): ReturnType<ChaiAssert['notDeepInclude']> {
+    this.incrementAssertionsCount()
     return assert.notDeepInclude(...args)
   }
 
@@ -940,6 +941,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.match('foobar', /^foo/) // passes
    */
   public match(...args: Parameters<ChaiAssert['match']>): ReturnType<ChaiAssert['match']> {
+    this.incrementAssertionsCount()
     return assert.match(...args)
   }
 
@@ -950,6 +952,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.notMatch('foobar', /^foo/) // fails
    */
   public notMatch(...args: Parameters<ChaiAssert['notMatch']>): ReturnType<ChaiAssert['notMatch']> {
+    this.incrementAssertionsCount()
     return assert.notMatch(...args)
   }
 
@@ -963,6 +966,7 @@ export class Assert extends Macroable implements AssertContract {
    * ) // passes
    */
   public property(...args: Parameters<ChaiAssert['property']>): ReturnType<ChaiAssert['property']> {
+    this.incrementAssertionsCount()
     return assert.nestedProperty(...args)
   }
 
@@ -978,6 +982,7 @@ export class Assert extends Macroable implements AssertContract {
   public notProperty(
     ...args: Parameters<ChaiAssert['notProperty']>
   ): ReturnType<ChaiAssert['notProperty']> {
+    this.incrementAssertionsCount()
     return assert.notNestedProperty(...args)
   }
 
@@ -1002,6 +1007,7 @@ export class Assert extends Macroable implements AssertContract {
   public propertyVal(
     ...args: Parameters<ChaiAssert['propertyVal']>
   ): ReturnType<ChaiAssert['propertyVal']> {
+    this.incrementAssertionsCount()
     return assert.nestedPropertyVal(...args)
   }
 
@@ -1018,6 +1024,7 @@ export class Assert extends Macroable implements AssertContract {
   public notPropertyVal(
     ...args: Parameters<ChaiAssert['notPropertyVal']>
   ): ReturnType<ChaiAssert['notPropertyVal']> {
+    this.incrementAssertionsCount()
     return assert.notNestedPropertyVal(...args)
   }
 
@@ -1034,6 +1041,7 @@ export class Assert extends Macroable implements AssertContract {
   public deepPropertyVal(
     ...args: Parameters<ChaiAssert['deepPropertyVal']>
   ): ReturnType<ChaiAssert['deepPropertyVal']> {
+    this.incrementAssertionsCount()
     return assert.deepNestedPropertyVal(...args)
   }
 
@@ -1050,6 +1058,7 @@ export class Assert extends Macroable implements AssertContract {
   public notDeepPropertyVal(
     ...args: Parameters<ChaiAssert['notDeepPropertyVal']>
   ): ReturnType<ChaiAssert['notDeepPropertyVal']> {
+    this.incrementAssertionsCount()
     return assert.notDeepNestedPropertyVal(...args)
   }
 
@@ -1064,6 +1073,7 @@ export class Assert extends Macroable implements AssertContract {
   public lengthOf<
     T extends { readonly length?: number | undefined; readonly size?: number | undefined }
   >(object: T, length: number, message?: string): ReturnType<ChaiAssert['lengthOf']> {
+    this.incrementAssertionsCount()
     return assert.lengthOf(object, length, message)
   }
 
@@ -1079,6 +1089,7 @@ export class Assert extends Macroable implements AssertContract {
   public properties(
     ...args: Parameters<ChaiAssert['containsAllKeys']>
   ): ReturnType<ChaiAssert['containsAllKeys']> {
+    this.incrementAssertionsCount()
     return assert.containsAllKeys(...args)
   }
 
@@ -1094,6 +1105,7 @@ export class Assert extends Macroable implements AssertContract {
   public anyProperties(
     ...args: Parameters<ChaiAssert['hasAnyKeys']>
   ): ReturnType<ChaiAssert['hasAnyKeys']> {
+    this.incrementAssertionsCount()
     return assert.hasAnyKeys(...args)
   }
 
@@ -1115,6 +1127,7 @@ export class Assert extends Macroable implements AssertContract {
   public onlyProperties(
     ...args: Parameters<ChaiAssert['hasAllKeys']>
   ): ReturnType<ChaiAssert['hasAllKeys']> {
+    this.incrementAssertionsCount()
     return assert.hasAllKeys(...args)
   }
 
@@ -1135,6 +1148,7 @@ export class Assert extends Macroable implements AssertContract {
   public notAnyProperties(
     ...args: Parameters<ChaiAssert['doesNotHaveAnyKeys']>
   ): ReturnType<ChaiAssert['doesNotHaveAnyKeys']> {
+    this.incrementAssertionsCount()
     return assert.doesNotHaveAnyKeys(...args)
   }
 
@@ -1150,6 +1164,7 @@ export class Assert extends Macroable implements AssertContract {
   public notAllProperties(
     ...args: Parameters<ChaiAssert['doesNotHaveAllKeys']>
   ): ReturnType<ChaiAssert['doesNotHaveAllKeys']> {
+    this.incrementAssertionsCount()
     return assert.doesNotHaveAllKeys(...args)
   }
 
@@ -1181,6 +1196,7 @@ export class Assert extends Macroable implements AssertContract {
     regExp?: RegExp | string,
     message?: string
   ): void {
+    this.incrementAssertionsCount()
     const args: [any, any, ...any[]] = [fn, errType, regExp, message]
     return assert.throws(...args)
   }
@@ -1213,6 +1229,7 @@ export class Assert extends Macroable implements AssertContract {
     regExp?: RegExp | string,
     message?: string
   ): void {
+    this.incrementAssertionsCount()
     const args: [any, any, ...any[]] = [fn, errType, regExp, message]
     return assert.doesNotThrow(...args)
   }
@@ -1226,6 +1243,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.closeTo(10, 20, 10) // passes
    */
   public closeTo(...args: Parameters<ChaiAssert['closeTo']>): ReturnType<ChaiAssert['closeTo']> {
+    this.incrementAssertionsCount()
     return assert.closeTo(...args)
   }
 
@@ -1240,6 +1258,7 @@ export class Assert extends Macroable implements AssertContract {
   public approximately(
     ...args: Parameters<ChaiAssert['approximately']>
   ): ReturnType<ChaiAssert['approximately']> {
+    this.incrementAssertionsCount()
     return assert.approximately(...args)
   }
 
@@ -1263,6 +1282,7 @@ export class Assert extends Macroable implements AssertContract {
   public sameMembers(
     ...args: Parameters<ChaiAssert['sameMembers']>
   ): ReturnType<ChaiAssert['sameMembers']> {
+    this.incrementAssertionsCount()
     return assert.sameMembers(...args)
   }
 
@@ -1287,6 +1307,7 @@ export class Assert extends Macroable implements AssertContract {
   public notSameMembers(
     ...args: Parameters<ChaiAssert['sameMembers']>
   ): ReturnType<ChaiAssert['sameMembers']> {
+    this.incrementAssertionsCount()
     return assert['notSameMembers'](...args)
   }
 
@@ -1307,6 +1328,7 @@ export class Assert extends Macroable implements AssertContract {
   public sameDeepMembers(
     ...args: Parameters<ChaiAssert['sameDeepMembers']>
   ): ReturnType<ChaiAssert['sameDeepMembers']> {
+    this.incrementAssertionsCount()
     return assert.sameDeepMembers(...args)
   }
 
@@ -1323,6 +1345,7 @@ export class Assert extends Macroable implements AssertContract {
   public notSameDeepMembers(
     ...args: Parameters<ChaiAssert['sameDeepMembers']>
   ): ReturnType<ChaiAssert['sameDeepMembers']> {
+    this.incrementAssertionsCount()
     return assert['notSameDeepMembers'](...args)
   }
 
@@ -1346,6 +1369,7 @@ export class Assert extends Macroable implements AssertContract {
   public sameOrderedMembers(
     ...args: Parameters<ChaiAssert['sameOrderedMembers']>
   ): ReturnType<ChaiAssert['sameOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.sameOrderedMembers(...args)
   }
 
@@ -1370,6 +1394,7 @@ export class Assert extends Macroable implements AssertContract {
   public notSameOrderedMembers(
     ...args: Parameters<ChaiAssert['notSameOrderedMembers']>
   ): ReturnType<ChaiAssert['notSameOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.notSameOrderedMembers(...args)
   }
 
@@ -1392,6 +1417,7 @@ export class Assert extends Macroable implements AssertContract {
   public sameDeepOrderedMembers(
     ...args: Parameters<ChaiAssert['sameDeepOrderedMembers']>
   ): ReturnType<ChaiAssert['sameDeepOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.sameDeepOrderedMembers(...args)
   }
 
@@ -1416,6 +1442,7 @@ export class Assert extends Macroable implements AssertContract {
   public notSameDeepOrderedMembers(
     ...args: Parameters<ChaiAssert['notSameDeepOrderedMembers']>
   ): ReturnType<ChaiAssert['notSameDeepOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.notSameDeepOrderedMembers(...args)
   }
 
@@ -1432,6 +1459,7 @@ export class Assert extends Macroable implements AssertContract {
   public includeMembers(
     ...args: Parameters<ChaiAssert['includeMembers']>
   ): ReturnType<ChaiAssert['includeMembers']> {
+    this.incrementAssertionsCount()
     return assert.includeMembers(...args)
   }
 
@@ -1448,6 +1476,7 @@ export class Assert extends Macroable implements AssertContract {
   public notIncludeMembers(
     ...args: Parameters<ChaiAssert['notIncludeMembers']>
   ): ReturnType<ChaiAssert['notIncludeMembers']> {
+    this.incrementAssertionsCount()
     return assert.notIncludeMembers(...args)
   }
 
@@ -1470,6 +1499,7 @@ export class Assert extends Macroable implements AssertContract {
   public includeDeepMembers(
     ...args: Parameters<ChaiAssert['includeDeepMembers']>
   ): ReturnType<ChaiAssert['includeDeepMembers']> {
+    this.incrementAssertionsCount()
     return assert.includeDeepMembers(...args)
   }
 
@@ -1492,6 +1522,7 @@ export class Assert extends Macroable implements AssertContract {
   public notIncludeDeepMembers(
     ...args: Parameters<ChaiAssert['includeDeepMembers']>
   ): ReturnType<ChaiAssert['includeDeepMembers']> {
+    this.incrementAssertionsCount()
     return assert['notIncludeDeepMembers'](...args)
   }
 
@@ -1521,6 +1552,7 @@ export class Assert extends Macroable implements AssertContract {
   public includeOrderedMembers(
     ...args: Parameters<ChaiAssert['includeOrderedMembers']>
   ): ReturnType<ChaiAssert['includeOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.includeOrderedMembers(...args)
   }
 
@@ -1551,6 +1583,7 @@ export class Assert extends Macroable implements AssertContract {
   public notIncludeOrderedMembers(
     ...args: Parameters<ChaiAssert['notIncludeOrderedMembers']>
   ): ReturnType<ChaiAssert['notIncludeOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.notIncludeOrderedMembers(...args)
   }
 
@@ -1579,6 +1612,7 @@ export class Assert extends Macroable implements AssertContract {
   public includeDeepOrderedMembers(
     ...args: Parameters<ChaiAssert['includeDeepOrderedMembers']>
   ): ReturnType<ChaiAssert['includeDeepOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.includeDeepOrderedMembers(...args)
   }
 
@@ -1608,6 +1642,7 @@ export class Assert extends Macroable implements AssertContract {
   public notIncludeDeepOrderedMembers(
     ...args: Parameters<ChaiAssert['notIncludeDeepOrderedMembers']>
   ): ReturnType<ChaiAssert['notIncludeDeepOrderedMembers']> {
+    this.incrementAssertionsCount()
     return assert.notIncludeDeepOrderedMembers(...args)
   }
 
@@ -1619,6 +1654,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isSealed({}) // fails
    */
   public isSealed(...args: Parameters<ChaiAssert['isSealed']>): ReturnType<ChaiAssert['isSealed']> {
+    this.incrementAssertionsCount()
     return assert.isSealed(...args)
   }
 
@@ -1633,6 +1669,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.sealed({}) // fails
    */
   public sealed(...args: Parameters<ChaiAssert['isSealed']>): ReturnType<ChaiAssert['isSealed']> {
+    this.incrementAssertionsCount()
     return assert.sealed(...args)
   }
 
@@ -1646,6 +1683,7 @@ export class Assert extends Macroable implements AssertContract {
   public isNotSealed(
     ...args: Parameters<ChaiAssert['isNotSealed']>
   ): ReturnType<ChaiAssert['isNotSealed']> {
+    this.incrementAssertionsCount()
     return assert.isNotSealed(...args)
   }
 
@@ -1662,6 +1700,7 @@ export class Assert extends Macroable implements AssertContract {
   public notSealed(
     ...args: Parameters<ChaiAssert['notSealed']>
   ): ReturnType<ChaiAssert['notSealed']> {
+    this.incrementAssertionsCount()
     return assert.notSealed(...args)
   }
 
@@ -1673,6 +1712,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isFrozen({}) // fails
    */
   public isFrozen(...args: Parameters<ChaiAssert['isFrozen']>): ReturnType<ChaiAssert['isFrozen']> {
+    this.incrementAssertionsCount()
     return assert.isFrozen(...args)
   }
 
@@ -1687,6 +1727,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.frozen({}) // fails
    */
   public frozen(...args: Parameters<ChaiAssert['frozen']>): ReturnType<ChaiAssert['frozen']> {
+    this.incrementAssertionsCount()
     return assert.frozen(...args)
   }
 
@@ -1700,6 +1741,7 @@ export class Assert extends Macroable implements AssertContract {
   public isNotFrozen(
     ...args: Parameters<ChaiAssert['isNotFrozen']>
   ): ReturnType<ChaiAssert['isNotFrozen']> {
+    this.incrementAssertionsCount()
     return assert.isNotFrozen(...args)
   }
 
@@ -1716,6 +1758,7 @@ export class Assert extends Macroable implements AssertContract {
   public notFrozen(
     ...args: Parameters<ChaiAssert['notFrozen']>
   ): ReturnType<ChaiAssert['notFrozen']> {
+    this.incrementAssertionsCount()
     return assert.notFrozen(...args)
   }
 
@@ -1728,6 +1771,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isEmpty('') // passes
    */
   public isEmpty(...args: Parameters<ChaiAssert['isEmpty']>): ReturnType<ChaiAssert['isEmpty']> {
+    this.incrementAssertionsCount()
     return assert.isEmpty(...args)
   }
 
@@ -1743,6 +1787,7 @@ export class Assert extends Macroable implements AssertContract {
    * assert.empty('') // passes
    */
   public empty(...args: Parameters<ChaiAssert['isEmpty']>): ReturnType<ChaiAssert['isEmpty']> {
+    this.incrementAssertionsCount()
     return assert.isEmpty(...args)
   }
 
@@ -1757,6 +1802,7 @@ export class Assert extends Macroable implements AssertContract {
   public isNotEmpty(
     ...args: Parameters<ChaiAssert['isNotEmpty']>
   ): ReturnType<ChaiAssert['isNotEmpty']> {
+    this.incrementAssertionsCount()
     return assert.isNotEmpty(...args)
   }
 
@@ -1774,6 +1820,7 @@ export class Assert extends Macroable implements AssertContract {
   public notEmpty(
     ...args: Parameters<ChaiAssert['isNotEmpty']>
   ): ReturnType<ChaiAssert['isNotEmpty']> {
+    this.incrementAssertionsCount()
     return assert.isNotEmpty(...args)
   }
 
@@ -1796,6 +1843,7 @@ export class Assert extends Macroable implements AssertContract {
    * ) // passes
    */
   public containsSubset(haystack: any, needle: any, message?: string) {
+    this.incrementAssertionsCount()
     this.evaluate(subsetCompare(needle, haystack), 'expected #{act} to contain subset #{exp}', {
       expected: haystack,
       actual: needle,
@@ -1815,6 +1863,7 @@ export class Assert extends Macroable implements AssertContract {
    * ) // passes
    */
   public notContainsSubset(haystack: any, needle: any, message?: string) {
+    this.incrementAssertionsCount()
     this.evaluate(
       !subsetCompare(needle, haystack),
       'expected #{act} to not contain subset #{exp}',
@@ -1855,6 +1904,7 @@ export class Assert extends Macroable implements AssertContract {
     message?: string
   ): Promise<void> {
     let raisedException: any = null
+    this.incrementAssertionsCount()
 
     /**
      * Fn should be a valid function
@@ -1993,6 +2043,7 @@ export class Assert extends Macroable implements AssertContract {
     regExp?: RegExp | string,
     message?: string
   ): Promise<void> {
+    this.incrementAssertionsCount()
     let raisedException: any = null
 
     /**
