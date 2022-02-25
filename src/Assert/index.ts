@@ -1877,6 +1877,18 @@ export class Assert extends Macroable implements AssertContract {
   }
 
   /**
+   * Assert the value is available in the provided list.
+   *
+   * @example
+   * assert.oneOf('foo', ['foo', 'bar', 'baz']) // passes
+   * assert.oneOf('foo', ['bar', 'baz']) // fails
+   */
+  public oneOf(...args: Parameters<ChaiAssert['oneOf']>): ReturnType<ChaiAssert['oneOf']> {
+    this.incrementAssertionsCount()
+    return assert.oneOf(...args)
+  }
+
+  /**
    * Assert the function to reject the promise or reject with a specific
    * error class/message
    *
