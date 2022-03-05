@@ -37,7 +37,7 @@
     "@adonisjs/mrm-preset": "^5.0.2",
     "@adonisjs/require-ts": "^2.0.10",
     "@japa/core": "^6.0.0",
-    "@japa/runner": "^1.2.0",
+    "@japa/runner": "^2.0.1",
     "@types/node": "^17.0.21",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
