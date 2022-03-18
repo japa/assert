@@ -109,6 +109,7 @@
   },
   "dependencies": {
     "@types/chai": "^4.3.0",
+    "api-contract-validator": "^2.2.8",
     "chai": "^4.3.6",
     "macroable": "^6.0.1"
   },

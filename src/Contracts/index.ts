@@ -73,3 +73,11 @@ export type AssertContract = Omit<
   | 'deepOwnInclude'
   | 'notDeepOwnInclude'
 >
+
+export type PluginConfig = {
+  openApi?: {
+    schemas: string[]
+    reportCoverage?: boolean
+    exportCoverage?: boolean
+  }
+}

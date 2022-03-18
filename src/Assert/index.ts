@@ -8,7 +8,8 @@
  */
 
 import { Macroable } from 'macroable'
-import { assert, Assertion, AssertionError } from 'chai'
+import { chaiPlugin } from 'api-contract-validator'
+import { assert, Assertion, AssertionError, use, expect } from 'chai'
 
 import { subsetCompare } from './utils'
 import { AssertContract, ChaiAssert } from '../Contracts'
@@ -27,6 +28,19 @@ import { AssertContract, ChaiAssert } from '../Contracts'
 export class Assert extends Macroable implements AssertContract {
   public static macros = {}
   public static getters = {}
+
+  protected static hasInstalledApiValidator = false
+
+  /**
+   * Register api specs to be used for validating responses
+   */
+  public static registerApiSpecs(
+    paths: string[],
+    options?: { reportCoverage?: boolean; exportCoverage?: boolean }
+  ) {
+    this.hasInstalledApiValidator = true
+    use(chaiPlugin({ apiDefinitionsPath: paths, ...options }))
+  }
 
   /**
    * Tracking assertions
@@ -2158,5 +2172,15 @@ export class Assert extends Macroable implements AssertContract {
         }
       )
     }
+  }
+
+  /**
+   * Assert the response confirms to open API spec
+   */
+  public isValidApiResponse(response: any) {
+    if (!this.constructor['hasInstalledApiValidator']) {
+      throw new Error('Cannot validate responses without defining api schemas')
+    }
+    return expect(response).to.matchApiSchema()
   }
 }
