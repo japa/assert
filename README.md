@@ -5,6 +5,8 @@
 
 An assertion library built on top of [Chai.assert](https://www.chaijs.com/guide/styles/#assert) with small tweaks and additional features like assertion planning.
 
+#### [Complete API documentation](https://japa.dev/plugins/assert)
+
 ## Installation
 Install the package from the npm registry as follows:
 
@@ -31,6 +33,28 @@ Once done, you will be able to access the `assert` property on the test context.
 ```ts
 test('test title', ({ assert }) => {
   assert.deepEqual({ id: 1 }, { id: 1})
+})
+```
+
+## Register open API schemas
+You can register open API schema and then assert HTTP responses against.
+
+```ts
+configure({
+  plugins: [assert({
+    openApi: {
+      schemas: [join(__dirname, '..', 'api-spec.json')]
+    }
+  })]
+})
+```
+
+Validate response as follows.
+
+```ts
+test('get users', ({ assert }) => {
+  const response = await supertest(baseUrl).get('/users')
+  assert.isValidateApiResponse(response)
 })
 ```
 
