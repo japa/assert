@@ -26,3 +26,9 @@ export function assert(): PluginFn {
     })
   }
 }
+
+declare module '@japa/runner' {
+  interface TestContext {
+    assert: Assert
+  }
+}

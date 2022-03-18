@@ -34,21 +34,6 @@ test('test title', ({ assert }) => {
 })
 ```
 
-## TypeScript types
-TypeScript will not provide intellisense for the `assert` property, since it is added at runtime.
-
-However, you can define the static type using the TypeScript module augmentation. Create a new file `japa-types.ts` and write the following code inside it.
-
-```ts
-import { Assert } from '@japa/assert'
-
-declare module '@japa/runner' {
-  interface TestContext {
-    assert: Assert
-  }
-}
-```
-
 [github-actions-url]: https://github.com/japa/assert/actions/workflows/test.yml
 [github-actions-image]: https://img.shields.io/github/workflow/status/japa/assert/test?style=for-the-badge "github-actions"
 
