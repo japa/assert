@@ -36,8 +36,8 @@
   "devDependencies": {
     "@adonisjs/mrm-preset": "^5.0.3",
     "@adonisjs/require-ts": "^2.0.10",
-    "@japa/core": "^6.0.2",
-    "@japa/runner": "^2.0.4",
+    "@japa/core": "^6.0.3",
+    "@japa/runner": "^2.0.5",
     "@types/node": "^17.0.22",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
@@ -111,7 +111,7 @@
     "@types/chai": "^4.3.0",
     "api-contract-validator": "^2.2.8",
     "chai": "^4.3.6",
-    "macroable": "^6.0.2"
+    "macroable": "^7.0.0"
   },
   "publishConfig": {
     "access": "public",
