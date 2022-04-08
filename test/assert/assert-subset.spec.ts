@@ -50,7 +50,7 @@ test.group('plain object', function () {
         },
         'foo'
       )
-    }, 'foo: expected { a: 2 } to contain subset { a: 1 }')
+    }, 'foo: expected { a: 1 } to contain subset { a: 2 }')
   })
 
   test('should pass for similar, but not the same object', function () {

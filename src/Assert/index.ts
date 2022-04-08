@@ -1859,8 +1859,8 @@ export class Assert extends Macroable implements AssertContract {
   public containsSubset(haystack: any, needle: any, message?: string) {
     this.incrementAssertionsCount()
     this.evaluate(subsetCompare(needle, haystack), 'expected #{act} to contain subset #{exp}', {
-      expected: haystack,
-      actual: needle,
+      expected: needle,
+      actual: haystack,
       operator: 'containsSubset',
       prefix: message,
     })
@@ -1882,8 +1882,8 @@ export class Assert extends Macroable implements AssertContract {
       !subsetCompare(needle, haystack),
       'expected #{act} to not contain subset #{exp}',
       {
-        expected: haystack,
-        actual: needle,
+        expected: needle,
+        actual: haystack,
         operator: 'notContainsSubset',
         prefix: message,
       }
