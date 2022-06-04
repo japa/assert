@@ -54,7 +54,7 @@ Validate response as follows.
 ```ts
 test('get users', ({ assert }) => {
   const response = await supertest(baseUrl).get('/users')
-  assert.isValidateApiResponse(response)
+  assert.isValidApiResponse(response)
 })
 ```
 
