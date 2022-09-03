@@ -33,11 +33,14 @@
   ],
   "author": "virk,japa",
   "license": "MIT",
+  "peerDependencies": {
+    "@japa/runner": "^2.1.1"
+  },
   "devDependencies": {
     "@adonisjs/mrm-preset": "^5.0.3",
     "@adonisjs/require-ts": "^2.0.12",
     "@japa/core": "^7.0.0",
-    "@japa/runner": "^2.1.0",
+    "@japa/runner": "^2.1.1",
     "@types/node": "^18.7.14",
     "commitizen": "^4.2.5",
     "cz-conventional-changelog": "^3.3.0",
