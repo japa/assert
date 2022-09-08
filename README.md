@@ -5,7 +5,7 @@
 
 An assertion library built on top of [Chai.assert](https://www.chaijs.com/guide/styles/#assert) with small tweaks and additional features like assertion planning.
 
-#### [Complete API documentation](https://japa.dev/plugins/assert)
+#### [Complete API documentation](https://japa.dev/docs/plugins/assert)
 
 ## Installation
 Install the package from the npm registry as follows:
