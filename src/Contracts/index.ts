@@ -12,7 +12,7 @@ import { assert } from 'chai'
 /**
  * Unnecessary similar methods have been removed
  */
-export type ChaiAssert = { [K in keyof typeof assert]: typeof assert[K] }
+export type ChaiAssert = { [K in keyof typeof assert]: (typeof assert)[K] }
 
 /**
  * Assert contract
