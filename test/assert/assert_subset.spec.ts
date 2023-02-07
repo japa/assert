@@ -1,15 +1,15 @@
 /*
  * @japa/assert
  *
- * (c) Harminder Virk <virk@adonisjs.com>
+ * (c) Japa.dev
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 import test from 'japa'
-import { Assert } from '../../src/Assert'
-import { expectError } from '../../test-helpers'
+import { Assert } from '../../src/assert/main'
+import { expectError } from '../../test_helpers'
 
 /**
  * Tests are copied from https://raw.githubusercontent.com/debitoor/chai-subset/master/test/unit/chai-subset.spec.js.

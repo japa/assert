@@ -1,7 +1,7 @@
 /*
  * @japa/assert
  *
- * (c) Harminder Virk <virk@adonisjs.com>
+ * (c) Japa.dev
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,7 +12,7 @@ import { chaiPlugin } from 'api-contract-validator'
 import { assert, Assertion, AssertionError, use, expect } from 'chai'
 
 import { subsetCompare } from './utils'
-import { AssertContract, ChaiAssert } from '../Contracts'
+import { AssertContract, ChaiAssert } from '../types'
 
 /**
  * The Assert class is derived from chai.assert to allow support
@@ -359,11 +359,15 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isAbove(5, 2) // passes
    * assert.isAbove(new Date('2020 12 20'), new Date('2020 12 18')) // passes
    */
-  public isAbove(valueToCheck: Date, valueToBeAbove: Date, message?: string): void
+  public isAbove(
+    valueToCheck: Date | { toJSDate(): Date },
+    valueToBeAbove: Date | { toJSDate(): Date },
+    message?: string
+  ): void
   public isAbove(valueToCheck: number, valueToBeAbove: number, message?: string): void
   public isAbove(
-    valueToCheck: number | Date,
-    valueToBeAbove: number | Date,
+    valueToCheck: number | Date | { toJSDate(): Date },
+    valueToBeAbove: number | Date | { toJSDate(): Date },
     message?: string
   ): ReturnType<ChaiAssert['isAbove']> {
     valueToCheck = this.luxonToJSDate(valueToCheck)
@@ -381,11 +385,15 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isAtLeast(2, 2) // passes
    * assert.isAtLeast(new Date('2020 12 20'), new Date('2020 12 20')) // passes
    */
-  public isAtLeast(valueToCheck: Date, valueToBeAtLeast: Date, message?: string): void
+  public isAtLeast(
+    valueToCheck: Date | { toJSDate(): Date },
+    valueToBeAtLeast: Date | { toJSDate(): Date },
+    message?: string
+  ): void
   public isAtLeast(valueToCheck: number, valueToBeAtLeast: number, message?: string): void
   public isAtLeast(
-    valueToCheck: number | Date,
-    valueToBeAtLeast: number | Date,
+    valueToCheck: number | Date | { toJSDate(): Date },
+    valueToBeAtLeast: number | Date | { toJSDate(): Date },
     message?: string
   ): ReturnType<ChaiAssert['isAtLeast']> {
     valueToCheck = this.luxonToJSDate(valueToCheck)
@@ -403,11 +411,15 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isBelow(2, 5) // passes
    * assert.isBelow(new Date('2020 12 20'), new Date('2020 12 24')) // passes
    */
-  public isBelow(valueToCheck: Date, valueToBeBelow: Date, message?: string): void
+  public isBelow(
+    valueToCheck: Date | { toJSDate(): Date },
+    valueToBeBelow: Date | { toJSDate(): Date },
+    message?: string
+  ): void
   public isBelow(valueToCheck: number, valueToBeBelow: number, message?: string): void
   public isBelow(
-    valueToCheck: number | Date,
-    valueToBeBelow: number | Date,
+    valueToCheck: number | Date | { toJSDate(): Date },
+    valueToBeBelow: number | Date | { toJSDate(): Date },
     message?: string
   ): ReturnType<ChaiAssert['isBelow']> {
     valueToCheck = this.luxonToJSDate(valueToCheck)
@@ -425,11 +437,15 @@ export class Assert extends Macroable implements AssertContract {
    * assert.isAtMost(2, 2) // passes
    * assert.isAtMost(new Date('2020 12 20'), new Date('2020 12 20')) // passes
    */
-  public isAtMost(valueToCheck: Date, valueToBeAtMost: Date, message?: string): void
+  public isAtMost(
+    valueToCheck: Date | { toJSDate(): Date },
+    valueToBeAtMost: Date | { toJSDate(): Date },
+    message?: string
+  ): void
   public isAtMost(valueToCheck: number, valueToBeAtMost: number, message?: string): void
   public isAtMost(
-    valueToCheck: number | Date,
-    valueToBeAtMost: number | Date,
+    valueToCheck: number | Date | { toJSDate(): Date },
+    valueToBeAtMost: number | Date | { toJSDate(): Date },
     message?: string
   ): ReturnType<ChaiAssert['isAtMost']> {
     valueToCheck = this.luxonToJSDate(valueToCheck)

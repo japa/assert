@@ -9,8 +9,8 @@
 
 import test from 'japa'
 import { join } from 'path'
-import { Assert } from '../../src/Assert'
-import { expectError } from '../../test-helpers'
+import { Assert } from '../../src/assert/main'
+import { expectError } from '../../test_helpers'
 
 Assert.registerApiSpecs([join(__dirname, '..', '..', 'api-spec.json')])
 

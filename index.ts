@@ -1,7 +1,7 @@
 /*
  * @japa/assert
  *
- * (c) Harminder Virk <virk@adonisjs.com>
+ * (c) Japa.dev
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,10 +9,10 @@
 
 import type { PluginFn } from '@japa/runner'
 
-import { Assert } from './src/Assert'
-import { PluginConfig } from './src/Contracts'
+import { Assert } from './src/assert/main'
+import { PluginConfig } from './src/types'
 
-export * from './src/Contracts'
+export * from './src/types'
 export { Assert }
 
 /**
