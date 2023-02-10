@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { PluginFn } from '@japa/runner'
+import type { PluginFn, Test as TestType } from '@japa/runner'
 
 import { Assert } from './src/assert/main'
 import { PluginConfig } from './src/types'
@@ -28,7 +28,7 @@ export function assert(options?: PluginConfig): PluginFn {
 
   return function (_, __, { TestContext, Test }) {
     TestContext.getter('assert', () => new Assert(), true)
-    Test.dispose(function (test, hasError) {
+    Test.dispose(function (test: TestType<any>, hasError) {
       if (!hasError) {
         test.context.assert.assertions.validate()
       }
