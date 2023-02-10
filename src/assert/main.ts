@@ -83,7 +83,7 @@ export class Assert extends Macroable implements AssertContract {
   /**
    * Increments the assertions count by 1
    */
-  private incrementAssertionsCount() {
+  public incrementAssertionsCount() {
     this.assertions.total += 1
   }
 

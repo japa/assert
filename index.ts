@@ -8,12 +8,9 @@
  */
 
 import type { PluginFn, Test as TestType } from '@japa/runner'
+import type { PluginConfig } from './src/types'
 
 import { Assert } from './src/assert/main'
-import { PluginConfig } from './src/types'
-
-export * from './src/types'
-export { Assert }
 
 /**
  * Plugin for "@japa/runner"
@@ -35,6 +32,9 @@ export function assert(options?: PluginConfig): PluginFn {
     })
   }
 }
+
+export * from './src/types'
+export { Assert }
 
 declare module '@japa/runner' {
   interface TestContext {
