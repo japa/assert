@@ -112,6 +112,7 @@ export class Assert extends Macroable implements AssertContract {
       actual: any
       expected: any
       operator: string
+      showDiff?: boolean
       prefix?: string
       thisObject?: any
     }
@@ -129,7 +130,7 @@ export class Assert extends Macroable implements AssertContract {
       '',
       stackProps.expected,
       stackProps.actual,
-      true
+      stackProps.showDiff === undefined ? true : stackProps.showDiff
     )
   }
 
