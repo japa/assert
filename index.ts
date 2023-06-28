@@ -34,3 +34,5 @@ export function assert(options?: PluginConfig): PluginFn {
     })
   }
 }
+
+export { Assert }
