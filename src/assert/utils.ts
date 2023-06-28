@@ -13,7 +13,7 @@
  * The package is not maintained anymore, hence it makes more sense
  * to own the small piece of code and evolve it as required.
  */
-export function subsetCompare(expected: any, actual: any) {
+export function subsetCompare(expected: any, actual: any): any {
   if (expected === actual) {
     return true
   }

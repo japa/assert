@@ -7,16 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
-import { join } from 'path'
-import { Assert } from '../../src/assert/main'
-import { expectError } from '../../test_helpers'
+import { test } from 'node:test'
+import { dirname, join } from 'node:path'
+import { Assert } from '../../src/assert/main.js'
+import { expectError } from '../../test_helpers/index.js'
+import { fileURLToPath } from 'node:url'
 
-Assert.registerApiSpecs([join(__dirname, '..', '..', 'api-spec.json')])
+Assert.registerApiSpecs([
+  join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'api-spec.json'),
+])
 
-test.group('assert | open api', () => {
+test.describe('assert | open api', () => {
   test('pass when response confirms to the api spec', () => {
     const assert = new Assert()
+
     assert.isValidApiResponse({
       path: '/v2/pet/1',
       method: 'get',

@@ -7,10 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import type { PluginFn, Test as TestType } from '@japa/runner'
-import type { PluginConfig } from './src/types'
+import './src/types/extended.js'
 
-import { Assert } from './src/assert/main'
+import type { PluginFn } from '@japa/runner/types'
+import { Test, TestContext } from '@japa/runner/core'
+import type { PluginConfig } from './src/types/main.js'
+import { Assert } from './src/assert/main.js'
 
 /**
  * Plugin for "@japa/runner"
@@ -23,21 +25,12 @@ export function assert(options?: PluginConfig): PluginFn {
     })
   }
 
-  return function (_, __, { TestContext, Test }) {
+  return function () {
     TestContext.getter('assert', () => new Assert(), true)
-    Test.dispose(function (test: TestType<any>, hasError) {
+    Test.executed(function (test: Test<any>, hasError) {
       if (!hasError) {
-        test.context.assert.assertions.validate()
+        test.context?.assert.assertions.validate()
       }
     })
-  }
-}
-
-export * from './src/types'
-export { Assert }
-
-declare module '@japa/runner' {
-  interface TestContext {
-    assert: Assert
   }
 }

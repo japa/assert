@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
-import { Assert } from '../../src/assert/main'
-import { expectError } from '../../test_helpers'
+import { before, test } from 'node:test'
+import { Assert } from '../../src/assert/main.js'
+import { expectError } from '../../test_helpers/index.js'
 
 /**
  * Tests are copied from https://raw.githubusercontent.com/debitoor/chai-subset/master/test/unit/chai-subset.spec.js.
@@ -17,7 +17,7 @@ import { expectError } from '../../test_helpers'
  * Therefore the tests naming and styles are not same as I would
  * normally have
  */
-test.group('plain object', function () {
+test.describe('plain object', function () {
   const testedObject = {
     a: 'b',
     c: 'd',
@@ -62,7 +62,7 @@ test.group('plain object', function () {
   })
 })
 
-test.group('complex object', function () {
+test.describe('complex object', function () {
   const testedObject = {
     a: 'b',
     c: 'd',
@@ -130,10 +130,10 @@ test.group('complex object', function () {
   })
 })
 
-test.group('circular objects', function (group) {
+test.describe('circular objects', function () {
   const object: any = {}
 
-  group.before(function () {
+  before(function () {
     object.arr = [object, object]
     object.arr.push(object.arr)
     object.obj = object
@@ -154,15 +154,15 @@ test.group('circular objects', function (group) {
   })
 })
 
-test.group('object with compare function', function () {
+test.describe('object with compare function', function () {
   test('should pass when function returns true', function () {
     const assert = new Assert()
-    assert.containsSubset({ a: 5 }, { a: (a) => a })
+    assert.containsSubset({ a: 5 }, { a: (a: any) => a })
   })
 
   test('should fail when function returns false', function () {
     const assert = new Assert()
-    assert.notContainsSubset({ a: 5 }, { a: (a) => !a })
+    assert.notContainsSubset({ a: 5 }, { a: (a: any) => !a })
   })
 
   test('should pass for function with no arguments', function () {
@@ -171,7 +171,7 @@ test.group('object with compare function', function () {
   })
 })
 
-test.group('comparison of non objects', function () {
+test.describe('comparison of non objects', function () {
   test('should fail if actual subset is null', function () {
     const assert = new Assert()
     assert.notContainsSubset(null, { a: 1 })
@@ -188,7 +188,7 @@ test.group('comparison of non objects', function () {
   })
 })
 
-test.group('comparison of dates', function () {
+test.describe('comparison of dates', function () {
   test('should pass for the same date', function () {
     const assert = new Assert()
     assert.containsSubset(new Date('2015-11-30'), new Date('2015-11-30'))
@@ -220,7 +220,7 @@ test.group('comparison of dates', function () {
   })
 })
 
-test.group('cyclic objects', () => {
+test.describe('cyclic objects', () => {
   test('should pass', () => {
     const assert = new Assert()
     const child: any = {}

@@ -7,11 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import test from 'japa'
-import { EOL } from 'os'
+// @ts-nocheck
+
+import { test } from 'node:test'
 import { DateTime } from 'luxon'
-import { Assert } from '../../src/assert/main'
-import { expectError, expectAsyncError } from '../../test_helpers'
+import { Assert } from '../../src/assert/main.js'
+import { expectError, expectAsyncError } from '../../test_helpers/index.js'
 
 /**
  * Tests in this file is a copy of
@@ -21,7 +22,7 @@ import { expectError, expectAsyncError } from '../../test_helpers'
  * Therefore the tests structure + naming is not same as I generally
  * do.
  */
-test.group('assert', function () {
+test.describe('assert', function () {
   test('assert', function () {
     let foo = 'bar'
 
@@ -381,8 +382,8 @@ test.group('assert', function () {
 
     assert.deepEqual({ tea: 'chai' }, { tea: 'chai' })
 
-    assert.deepEqual([NaN], [NaN])
-    assert.deepEqual({ tea: NaN }, { tea: NaN })
+    assert.deepEqual([Number.NaN], [Number.NaN])
+    assert.deepEqual({ tea: Number.NaN }, { tea: Number.NaN })
 
     expectError(function () {
       assert.deepEqual({ tea: 'chai' }, { tea: 'black' }, 'blah')
@@ -503,10 +504,10 @@ test.group('assert', function () {
 
   test('isNaN', function () {
     const assert = new Assert()
-    assert.isNaN(NaN)
+    assert.isNaN(Number.NaN)
 
     expectError(function () {
-      assert.isNaN(Infinity, 'blah')
+      assert.isNaN(Number.POSITIVE_INFINITY, 'blah')
     }, 'blah: expected Infinity to be NaN')
 
     expectError(function () {
@@ -526,12 +527,12 @@ test.group('assert', function () {
     const assert = new Assert()
 
     assert.isNotNaN(4)
-    assert.isNotNaN(Infinity)
+    assert.isNotNaN(Number.POSITIVE_INFINITY)
     assert.isNotNaN(undefined)
     assert.isNotNaN({})
 
     expectError(function () {
-      assert.isNotNaN(NaN, 'blah')
+      assert.isNotNaN(Number.NaN, 'blah')
     }, 'blah: expected NaN not to be NaN')
   })
 
@@ -679,11 +680,11 @@ test.group('assert', function () {
     assert.isFinite(-10)
 
     expectError(function () {
-      assert.isFinite(NaN, 'blah')
+      assert.isFinite(Number.NaN, 'blah')
     }, 'blah: expected NaN to be a finite number')
 
     expectError(function () {
-      assert.isFinite(Infinity)
+      assert.isFinite(Number.POSITIVE_INFINITY)
     }, 'expected Infinity to be a finite number')
 
     expectError(function () {
@@ -774,12 +775,12 @@ test.group('assert', function () {
       map.set('a', val)
       map.set('b', 2)
       map.set('c', -0)
-      map.set('d', NaN)
+      map.set('d', Number.NaN)
 
       assert.include(map, val)
       assert.include(map, 2)
       assert.include(map, 0)
-      assert.include(map, NaN)
+      assert.include(map, Number.NaN)
     }
 
     if (typeof Set === 'function') {
@@ -788,7 +789,7 @@ test.group('assert', function () {
       set.add(value)
       set.add(2)
       set.add(-0)
-      set.add(NaN)
+      set.add(Number.NaN)
 
       assert.include(set, value)
       assert.include(set, 2)
@@ -797,7 +798,7 @@ test.group('assert', function () {
         // SameValue instead of SameValueZero equality for sets.
         assert.include(set, 0)
       }
-      assert.include(set, NaN)
+      assert.include(set, Number.NaN)
     }
 
     if (typeof WeakSet === 'function') {
@@ -1115,7 +1116,7 @@ test.group('assert', function () {
       })
 
       const weirdMapKey1 = Object.create(null)
-      const weirdMapKey2 = { toString: NaN }
+      const weirdMapKey2 = { toString: Number.NaN }
       const weirdMapKey3 = []
       const weirdMap = new Map()
 
@@ -1213,7 +1214,7 @@ test.group('assert', function () {
       })
 
       const weirdSetKey1 = Object.create(null)
-      const weirdSetKey2 = { toString: NaN }
+      const weirdSetKey2 = { toString: Number.NaN }
       const weirdSetKey3 = []
       const weirdSet = new Set()
 
@@ -1740,7 +1741,7 @@ test.group('assert', function () {
     const assert = new Assert()
 
     class CustomError extends Error {
-      public name = 'CustomError'
+      name = 'CustomError'
     }
 
     assert.doesNotThrows(function () {})
@@ -1878,7 +1879,7 @@ test.group('assert', function () {
     const assert = new Assert()
 
     class CustomError extends Error {
-      public name = 'CustomError'
+      name = 'CustomError'
     }
 
     await assert.doesNotRejects(async function () {})
@@ -3018,7 +3019,9 @@ test.group('assert', function () {
     })
   })
 
-  test('oneOf', function (assert) {
+  test('oneOf', function () {
+    const assert = new Assert()
+
     assert.oneOf(1, [1, 2, 3])
 
     var three = [3]
@@ -3049,7 +3052,7 @@ test.group('assert', function () {
   })
 })
 
-test.group('fail', function () {
+test.describe('fail', function () {
   test('should accept a message as the 3rd argument', function () {
     const assert = new Assert()
 
@@ -3075,8 +3078,8 @@ test.group('fail', function () {
   })
 })
 
-test.group('assertion planning', function () {
-  test('fail when planned assertions are over total assertions', function (japaAssert) {
+test.describe('assertion planning', function () {
+  test('fail when planned assertions are over total assertions', async function () {
     const assert = new Assert()
     assert.plan(2)
 
@@ -3084,11 +3087,9 @@ test.group('assertion planning', function () {
       assert.fail(0, 1, 'this has failed')
     }, /this has failed/)
 
-    try {
+    expectError(() => {
       assert.assertions.validate()
-    } catch (error) {
-      japaAssert.match(error.stack.split(EOL)[2], /:3081/)
-    }
+    })
   })
 
   test('fail when planned assertions are under total assertions', function () {
