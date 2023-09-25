@@ -35,35 +35,35 @@
     "sync-labels": "github-label-sync --labels .github/labels.json japa/assert"
   },
   "devDependencies": {
-    "@adonisjs/eslint-config": "^1.1.5",
-    "@adonisjs/prettier-config": "^1.1.5",
-    "@adonisjs/tsconfig": "^1.1.5",
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
+    "@adonisjs/eslint-config": "^1.1.8",
+    "@adonisjs/prettier-config": "^1.1.8",
+    "@adonisjs/tsconfig": "^1.1.8",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@japa/core": "^8.0.0-6",
     "@japa/errors-printer": "3.0.0-4",
     "@japa/runner": "^3.0.0-1",
-    "@swc/core": "^1.3.66",
-    "@types/luxon": "^3.3.0",
-    "@types/node": "^20.3.2",
-    "c8": "^8.0.0",
+    "@swc/core": "1.3.82",
+    "@types/luxon": "^3.3.2",
+    "@types/node": "^20.6.5",
+    "c8": "^8.0.1",
     "cross-env": "^7.0.3",
-    "del-cli": "^5.0.0",
-    "eslint": "^8.43.0",
+    "del-cli": "^5.1.0",
+    "eslint": "^8.50.0",
     "github-label-sync": "^2.3.1",
-    "glob": "^10.3.1",
+    "glob": "^10.3.7",
     "husky": "^8.0.3",
-    "luxon": "^3.3.0",
+    "luxon": "^3.4.3",
     "np": "^8.0.4",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.5"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "api-contract-validator": "^2.2.8",
     "@poppinss/macroable": "^1.0.0-6",
-    "chai": "^4.3.7",
-    "@types/chai": "^4.3.5"
+    "@types/chai": "^4.3.6",
+    "api-contract-validator": "^2.2.8",
+    "chai": "^4.3.8"
   },
   "peerDependencies": {
     "@japa/runner": "^3.0.0-1"

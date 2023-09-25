@@ -829,23 +829,19 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.include(true, true, 'blah')
-    }, 'blah: the given combination of arguments (boolean and boolean) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a boolean')
+    }, 'blah: the given combination of arguments (boolean and boolean) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a boolean')
 
     expectError(function () {
       assert.include(42, 'bar')
-    }, 'the given combination of arguments (number and string) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
+    }, 'the given combination of arguments (number and string) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
 
     expectError(function () {
       assert.include(null, 42)
-    }, 'the given combination of arguments (null and number) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a number')
+    }, 'the given combination of arguments (null and number) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a number')
 
     expectError(function () {
       assert.include(undefined, 'bar')
-    }, 'the given combination of arguments (undefined and string) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
+    }, 'the given combination of arguments (undefined and string) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
   })
 
   test('notInclude', function () {
@@ -914,23 +910,19 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.notInclude(true, true, 'blah')
-    }, 'blah: the given combination of arguments (boolean and boolean) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a boolean')
+    }, 'blah: the given combination of arguments (boolean and boolean) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a boolean')
 
     expectError(function () {
       assert.notInclude(42, 'bar')
-    }, 'the given combination of arguments (number and string) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
+    }, 'the given combination of arguments (number and string) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
 
     expectError(function () {
       assert.notInclude(null, 42)
-    }, 'the given combination of arguments (null and number) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a number')
+    }, 'the given combination of arguments (null and number) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a number')
 
     expectError(function () {
       assert.notInclude(undefined, 'bar')
-    }, 'the given combination of arguments (undefined and string) is invalid for this assertion. ' +
-      'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
+    }, 'the given combination of arguments (undefined and string) is invalid for this assertion. ' + 'You can use an array, a map, an object, a set, a string, or a weakset instead of a string')
 
     expectError(function () {
       assert.notInclude('foobar', 'bar')
@@ -2380,13 +2372,19 @@ test.describe('assert', function () {
     const oneSecondAgo = new Date(now.getTime() - 1000)
     assert.isAbove(now, oneSecondAgo, 'Now should be above 1 second ago')
 
-    expectError(function () {
-      assert.isAbove(oneSecondAgo, now, 'blah')
-    }, 'blah: expected ' + oneSecondAgo.toISOString() + ' to be above ' + now.toISOString())
+    expectError(
+      function () {
+        assert.isAbove(oneSecondAgo, now, 'blah')
+      },
+      'blah: expected ' + oneSecondAgo.toISOString() + ' to be above ' + now.toISOString()
+    )
 
-    expectError(function () {
-      assert.isAbove(now, now, 'blah')
-    }, 'blah: expected ' + now.toISOString() + ' to be above ' + now.toISOString())
+    expectError(
+      function () {
+        assert.isAbove(now, now, 'blah')
+      },
+      'blah: expected ' + now.toISOString() + ' to be above ' + now.toISOString()
+    )
 
     expectError(function () {
       assert.isAbove(null as any, now)
@@ -2412,19 +2410,25 @@ test.describe('assert', function () {
     const oneSecondAgo = DateTime.local().minus({ seconds: 1000 })
     assert.isAbove(now, oneSecondAgo, 'Now should be above 1 second ago')
 
-    expectError(function () {
-      assert.isAbove(oneSecondAgo, now, 'blah')
-    }, 'blah: expected ' +
-      oneSecondAgo.toJSDate().toISOString() +
-      ' to be above ' +
-      now.toJSDate().toISOString())
+    expectError(
+      function () {
+        assert.isAbove(oneSecondAgo, now, 'blah')
+      },
+      'blah: expected ' +
+        oneSecondAgo.toJSDate().toISOString() +
+        ' to be above ' +
+        now.toJSDate().toISOString()
+    )
 
-    expectError(function () {
-      assert.isAbove(now, now, 'blah')
-    }, 'blah: expected ' +
-      now.toJSDate().toISOString() +
-      ' to be above ' +
-      now.toJSDate().toISOString())
+    expectError(
+      function () {
+        assert.isAbove(now, now, 'blah')
+      },
+      'blah: expected ' +
+        now.toJSDate().toISOString() +
+        ' to be above ' +
+        now.toJSDate().toISOString()
+    )
 
     expectError(function () {
       assert.isAbove(now, 1 as any, 'blah')
@@ -2464,9 +2468,12 @@ test.describe('assert', function () {
     assert.isAtLeast(now, oneSecondAgo, 'Now should be above one second ago')
     assert.isAtLeast(now, now, 'Now should be equal to now')
 
-    expectError(function () {
-      assert.isAtLeast(now, oneSecondAfter, 'blah')
-    }, 'blah: expected ' + now.toISOString() + ' to be at least ' + oneSecondAfter.toISOString())
+    expectError(
+      function () {
+        assert.isAtLeast(now, oneSecondAfter, 'blah')
+      },
+      'blah: expected ' + now.toISOString() + ' to be at least ' + oneSecondAfter.toISOString()
+    )
 
     expectError(function () {
       assert.isAtLeast(null as any, now, 'blah')
@@ -2514,13 +2521,19 @@ test.describe('assert', function () {
     var oneSecondAgo = new Date(now.getTime() - 1000)
     assert.isBelow(oneSecondAgo, now, 'One second ago should be below now')
 
-    expectError(function () {
-      assert.isBelow(now, oneSecondAgo, 'blah')
-    }, 'blah: expected ' + now.toISOString() + ' to be below ' + oneSecondAgo.toISOString())
+    expectError(
+      function () {
+        assert.isBelow(now, oneSecondAgo, 'blah')
+      },
+      'blah: expected ' + now.toISOString() + ' to be below ' + oneSecondAgo.toISOString()
+    )
 
-    expectError(function () {
-      assert.isBelow(now, now)
-    }, 'expected ' + now.toISOString() + ' to be below ' + now.toISOString())
+    expectError(
+      function () {
+        assert.isBelow(now, now)
+      },
+      'expected ' + now.toISOString() + ' to be below ' + now.toISOString()
+    )
 
     expectError(function () {
       assert.isBelow(null as any, now, 'blah')
@@ -2568,9 +2581,12 @@ test.describe('assert', function () {
     assert.isAtMost(oneSecondAgo, now, 'Now should be below one second ago')
     assert.isAtMost(now, now, 'Now should be equal to now')
 
-    expectError(function () {
-      assert.isAtMost(oneSecondAfter, now, 'blah')
-    }, 'blah: expected ' + oneSecondAfter.toISOString() + ' to be at most ' + now.toISOString())
+    expectError(
+      function () {
+        assert.isAtMost(oneSecondAfter, now, 'blah')
+      },
+      'blah: expected ' + oneSecondAfter.toISOString() + ' to be at most ' + now.toISOString()
+    )
 
     expectError(function () {
       assert.isAtMost(null as any, now, 'blah')
