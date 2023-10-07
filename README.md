@@ -43,7 +43,7 @@ You can register open API schema and then assert HTTP responses against.
 configure({
   plugins: [assert({
     openApi: {
-      schemas: [join(__dirname, '..', 'api-spec.json')]
+      schemas: [new URL('../api-spec.json', import.meta.url)]
     }
   })]
 })
