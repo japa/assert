@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { fileURLToPath } from 'node:url'
 import Macroable from '@poppinss/macroable'
 import { chaiPlugin } from 'api-contract-validator'
 import { assert, Assertion, AssertionError, use, expect } from 'chai'
@@ -32,10 +33,14 @@ export class Assert extends Macroable implements AssertContract {
    * Register api specs to be used for validating responses
    */
   static registerApiSpecs(
-    paths: string[],
+    schemaPathsOrURLs: (string | URL)[],
     options?: { reportCoverage?: boolean; exportCoverage?: boolean }
   ) {
     this.hasInstalledApiValidator = true
+    const paths = schemaPathsOrURLs.map((schemaPathsOrURL) => {
+      return schemaPathsOrURL instanceof URL ? fileURLToPath(schemaPathsOrURL) : schemaPathsOrURL
+    })
+
     use(chaiPlugin({ apiDefinitionsPath: paths, ...options }))
   }
 

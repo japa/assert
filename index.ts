@@ -11,8 +11,9 @@ import './src/types/extended.js'
 
 import type { PluginFn } from '@japa/runner/types'
 import { Test, TestContext } from '@japa/runner/core'
-import type { PluginConfig } from './src/types/main.js'
+
 import { Assert } from './src/assert/main.js'
+import type { PluginConfig } from './src/types/main.js'
 
 /**
  * Plugin for "@japa/runner"

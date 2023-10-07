@@ -76,7 +76,7 @@ export type AssertContract = Omit<
 
 export type PluginConfig = {
   openApi?: {
-    schemas: string[]
+    schemas: (string | URL)[]
     reportCoverage?: boolean
     exportCoverage?: boolean
   }

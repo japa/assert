@@ -8,14 +8,10 @@
  */
 
 import { test } from 'node:test'
-import { dirname, join } from 'node:path'
 import { Assert } from '../../src/assert/main.js'
 import { expectError } from '../../test_helpers/index.js'
-import { fileURLToPath } from 'node:url'
 
-Assert.registerApiSpecs([
-  join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'api-spec.json'),
-])
+Assert.registerApiSpecs([new URL('../../api-spec.json', import.meta.url)])
 
 test.describe('assert | open api', () => {
   test('pass when response confirms to the api spec', () => {
