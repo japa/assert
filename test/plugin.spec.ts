@@ -9,12 +9,11 @@
 
 import { test } from 'node:test'
 import { assert as chaiAssert } from 'chai'
-import { Emitter, Refiner } from '@japa/core'
-import { TestContext, Test } from '@japa/runner/core'
+import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
 import { assert } from '../index.js'
-import { wrapAssertions } from '../test_helpers/index.js'
 import { Assert } from '../src/assert/main.js'
+import { wrapAssertions } from '../test_helpers/index.js'
 
 test.describe('Plugin', () => {
   test('add assert property to test context', async () => {
