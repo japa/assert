@@ -11,8 +11,8 @@
 
 import { test } from 'node:test'
 import { DateTime } from 'luxon'
-import { Assert } from '../../src/assert/main.js'
-import { expectError, expectAsyncError } from '../../test_helpers/index.js'
+import { Assert } from '../../src/assert.js'
+import { expectError, expectAsyncError } from '../../tests_helpers/index.js'
 
 /**
  * Tests in this file is a copy of

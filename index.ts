@@ -7,13 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import './src/types/extended.js'
-
 import type { PluginFn } from '@japa/runner/types'
 import { Test, TestContext } from '@japa/runner/core'
 
-import { Assert } from './src/assert/main.js'
-import type { PluginConfig } from './src/types/main.js'
+import { Assert } from './src/assert.js'
+import type { PluginConfig } from './src/types.js'
+
+declare module '@japa/runner/core' {
+  interface TestContext {
+    assert: Assert
+  }
+}
 
 /**
  * Plugin for "@japa/runner"

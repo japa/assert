@@ -8,25 +8,23 @@
   "main": "./build/index.js",
   "type": "module",
   "files": [
-    "index.ts",
-    "src",
-    "build/src",
-    "build/index.d.ts",
-    "build/index.js",
-    "build/index.d.ts.map"
+    "build",
+    "!build/tests",
+    "!build/tests_helpers"
   ],
   "exports": {
     ".": "./build/index.js",
-    "./types": "./build/src/types/main.js"
+    "./types": "./build/src/types.js"
   },
   "scripts": {
     "pretest": "npm run lint && npm run typecheck",
     "test": "c8 npm run quick:test",
     "quick:test": "cross-env NODE_NO_WARNINGS=1 glob -c \"node --enable-source-maps --loader=ts-node/esm --test\" \"test/**/*.spec.ts\"",
     "clean": "del-cli build",
-    "compile": "npm run lint && npm run clean && tsc",
+    "precompile": "npm run lint && npm run clean",
+    "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
     "build": "npm run compile",
-    "release": "np --message=\"chore(release): %s\"",
+    "release": "np",
     "version": "npm run build",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
@@ -56,6 +54,7 @@
     "np": "^8.0.4",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -113,5 +112,17 @@
   },
   "directories": {
     "test": "tests"
+  },
+  "tsup": {
+    "entry": [
+      "./index.ts",
+      "./src/types.ts"
+    ],
+    "outDir": "./build",
+    "clean": true,
+    "format": "esm",
+    "dts": false,
+    "sourcemap": true,
+    "target": "esnext"
   }
 }

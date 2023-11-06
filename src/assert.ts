@@ -13,7 +13,7 @@ import { chaiPlugin } from 'api-contract-validator'
 import { assert, Assertion, AssertionError, use, expect } from 'chai'
 
 import { subsetCompare } from './utils.js'
-import type { AssertContract, ChaiAssert } from '../types/main.js'
+import type { AssertContract, ChaiAssert } from './types.js'
 
 /**
  * The Assert class is derived from chai.assert to allow support

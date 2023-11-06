@@ -8,8 +8,8 @@
  */
 
 import { before, test } from 'node:test'
-import { Assert } from '../../src/assert/main.js'
-import { expectError } from '../../test_helpers/index.js'
+import { Assert } from '../../src/assert.js'
+import { expectError } from '../../tests_helpers/index.js'
 
 /**
  * Tests are copied from https://raw.githubusercontent.com/debitoor/chai-subset/master/test/unit/chai-subset.spec.js.

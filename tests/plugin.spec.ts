@@ -12,8 +12,8 @@ import { assert as chaiAssert } from 'chai'
 import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
 import { assert } from '../index.js'
-import { Assert } from '../src/assert/main.js'
-import { wrapAssertions } from '../test_helpers/index.js'
+import { Assert } from '../src/assert.js'
+import { wrapAssertions } from '../tests_helpers/index.js'
 
 test.describe('Plugin', () => {
   test('add assert property to test context', async () => {

@@ -8,8 +8,8 @@
  */
 
 import { test } from 'node:test'
-import { Assert } from '../../src/assert/main.js'
-import { expectError } from '../../test_helpers/index.js'
+import { Assert } from '../../src/assert.js'
+import { expectError } from '../../tests_helpers/index.js'
 
 Assert.registerApiSpecs([new URL('../../api-spec.json', import.meta.url)])
 
