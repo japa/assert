@@ -887,13 +887,13 @@ export class Assert extends Macroable implements AssertContract {
    * See {@link this.deepInclude} for nested object properties
    *
    * @example
-   * assert.include(
+   * assert.notInclude(
    *   { id: 1, name: 'virk' },
-   *   { name: 'virk' }
+   *   { name: 'foo' }
    * ) // passes
    *
-   * assert.include([1, 2, 3], 2) // passes
-   * assert.include('hello world', 'hello') // passes
+   * assert.notInclude([1, 2, 3], 4) // passes
+   * assert.notInclude('hello world', 'bar') // passes
    */
   notInclude(...args: Parameters<ChaiAssert['notInclude']>): ReturnType<ChaiAssert['notInclude']> {
     this.incrementAssertionsCount()
@@ -929,7 +929,7 @@ export class Assert extends Macroable implements AssertContract {
    *   { foo: { a: 4 } }
    * ) // passes
    *
-   * assert.deepInclude([1, [2], 3], [20]) // passes
+   * assert.notDeepInclude([1, [2], 3], [20]) // passes
    */
   notDeepInclude(
     ...args: Parameters<ChaiAssert['notDeepInclude']>
