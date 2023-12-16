@@ -19,7 +19,7 @@
   "scripts": {
     "pretest": "npm run lint && npm run typecheck",
     "test": "c8 npm run quick:test",
-    "quick:test": "cross-env NODE_NO_WARNINGS=1 glob -c \"node --enable-source-maps --loader=ts-node/esm --test\" \"test/**/*.spec.ts\"",
+    "quick:test": "cross-env NODE_NO_WARNINGS=1 glob -c \"node --enable-source-maps --loader=ts-node/esm --test\" \"tests/**/*.spec.ts\"",
     "clean": "del-cli build",
     "precompile": "npm run lint && npm run clean",
     "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",

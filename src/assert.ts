@@ -1216,20 +1216,20 @@ export class Assert extends Macroable implements AssertContract {
    * @example
    * function foo() { throw new Error('blow up') }
    *
-   * assert.doesNotThrows(foo) // fails
-   * assert.doesNotThrows(foo, 'failed') // passes
-   * assert.doesNotThrows(() => {}) // passes
+   * assert.doesNotThrow(foo) // fails
+   * assert.doesNotThrow(foo, 'failed') // passes
+   * assert.doesNotThrow(() => {}) // passes
    */
-  doesNotThrows(fn: () => void, message?: string): void
-  doesNotThrows(fn: () => void, regExp: RegExp): void
-  doesNotThrows(fn: () => void, constructor: ErrorConstructor, message?: string): void
-  doesNotThrows(
+  doesNotThrow(fn: () => void, message?: string): void
+  doesNotThrow(fn: () => void, regExp: RegExp): void
+  doesNotThrow(fn: () => void, constructor: ErrorConstructor, message?: string): void
+  doesNotThrow(
     fn: () => void,
     constructor: ErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): void
-  doesNotThrows(
+  doesNotThrow(
     fn: () => void,
     errType?: RegExp | ErrorConstructor | string,
     regExp?: RegExp | string,
@@ -1239,6 +1239,12 @@ export class Assert extends Macroable implements AssertContract {
     const args: [any, any, ...any[]] = [fn, errType, regExp, message]
     return assert.doesNotThrow(...args)
   }
+
+  /**
+   * @deprecated
+   * Use {@link Assert.doesNotThrow} without the "s"
+   */
+  doesNotThrows = this.doesNotThrow.bind(this)
 
   /**
    * Assert the value is closer to the expected value + delta
@@ -2025,34 +2031,34 @@ export class Assert extends Macroable implements AssertContract {
    * The method returns a promise
    *
    * @example
-   * await assert.doesNotRejects(
+   * await assert.doesNotReject(
    *   async () => throw new Error('foo'),
    *   HttpError
    * ) // passes: Error !== HttpError
    *
-   * await assert.doesNotRejects(
+   * await assert.doesNotReject(
    *   async () => throw new HttpError('Resource not found'),
    *   HttpError,
    *   'Server not available'
    * ) // passes: Resource not found !== Server not available
    *
-   * await assert.doesNotRejects(
+   * await assert.doesNotReject(
    *   async () => return 'foo',
    * ) // passes
    */
-  async doesNotRejects(fn: () => void, message?: string): Promise<void>
-  async doesNotRejects(
+  async doesNotReject(fn: () => void, message?: string): Promise<void>
+  async doesNotReject(
     fn: () => void | Promise<void>,
     errType: RegExp | ErrorConstructor,
     message?: string
   ): Promise<void>
-  async doesNotRejects(
+  async doesNotReject(
     fn: () => void | Promise<void>,
     constructor: ErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): Promise<void>
-  async doesNotRejects(
+  async doesNotReject(
     fn: () => void | Promise<void>,
     errType?: RegExp | ErrorConstructor | string,
     regExp?: RegExp | string,
@@ -2070,7 +2076,7 @@ export class Assert extends Macroable implements AssertContract {
         expected: '',
         actual: '',
         prefix: message,
-        operator: 'doesNotRejects',
+        operator: 'doesNotReject',
       })
     }
 
@@ -2116,7 +2122,7 @@ export class Assert extends Macroable implements AssertContract {
         expected: expectedExceptionClass,
         actual: raisedException,
         prefix: message,
-        operator: 'doesNotRejects',
+        operator: 'doesNotReject',
       })
     }
 
@@ -2129,7 +2135,7 @@ export class Assert extends Macroable implements AssertContract {
         expected: expectedExceptionClass,
         actual: raisedException,
         prefix: message,
-        operator: 'doesNotRejects',
+        operator: 'doesNotReject',
       })
     }
 
@@ -2139,7 +2145,7 @@ export class Assert extends Macroable implements AssertContract {
         expected: expectedErrorMessageRegex,
         actual: raisedException.message,
         prefix: message,
-        operator: 'doesNotRejects',
+        operator: 'doesNotReject',
       })
     }
 
@@ -2157,11 +2163,17 @@ export class Assert extends Macroable implements AssertContract {
           expected: hasMatchingErrorClass ? expectedExceptionClass : expectedErrorMessage,
           actual: hasMatchingErrorClass ? raisedException : raisedException.message,
           prefix: message,
-          operator: 'doesNotRejects',
+          operator: 'doesNotReject',
         }
       )
     }
   }
+
+  /**
+   * @deprecated
+   * Use {@link Assert.doesNotReject} without the "s"
+   */
+  doesNotRejects = this.doesNotReject.bind(this)
 
   /**
    * Assert the response confirms to open API spec
