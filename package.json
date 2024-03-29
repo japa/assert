@@ -1,7 +1,7 @@
 {
   "name": "@japa/assert",
   "description": "Assertion module for Japa",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "engines": {
     "node": ">=18.16.0"
   },
