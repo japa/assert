@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import chai from 'chai'
+import * as chai from 'chai'
 import { ErrorsPrinter } from '@japa/errors-printer'
 
 export async function wrapAssertions(fn: () => void | Promise<void>) {

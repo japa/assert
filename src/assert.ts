@@ -1360,8 +1360,7 @@ export class Assert extends Macroable implements AssertContract {
     ...args: Parameters<ChaiAssert['sameDeepMembers']>
   ): ReturnType<ChaiAssert['sameDeepMembers']> {
     this.incrementAssertionsCount()
-    // @ts-expect-error not in @types/chai
-    return assert['notSameDeepMembers'](...args)
+    return assert.notSameDeepMembers(...args)
   }
 
   /**

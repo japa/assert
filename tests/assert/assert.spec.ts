@@ -187,11 +187,11 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.instanceOf(new Foo(), 1 as any, 'blah')
-    }, 'blah: The instanceof assertion needs a constructor but number was given.')
+    }, 'blah: The instanceof assertion needs a constructor but Number was given.')
 
     expectError(function () {
       assert.instanceOf(new Foo(), 'batman' as any)
-    }, 'The instanceof assertion needs a constructor but string was given.')
+    }, 'The instanceof assertion needs a constructor but String was given.')
 
     expectError(function () {
       assert.instanceOf(new Foo(), {} as any)
@@ -199,7 +199,7 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.instanceOf(new Foo(), true as any)
-    }, 'The instanceof assertion needs a constructor but boolean was given.')
+    }, 'The instanceof assertion needs a constructor but Boolean was given.')
 
     expectError(function () {
       assert.instanceOf(new Foo(), null as any)
@@ -214,12 +214,12 @@ test.describe('assert', function () {
       var t = new Thing()
       Thing.prototype = 1337
       assert.instanceOf(t, Thing)
-    }, 'The instanceof assertion needs a constructor but function was given.')
+    }, 'The instanceof assertion needs a constructor but Function was given.')
 
     if (typeof Symbol !== 'undefined' && typeof Symbol.hasInstance !== 'undefined') {
       expectError(function () {
         assert.instanceOf(new Foo(), Symbol() as any)
-      }, 'The instanceof assertion needs a constructor but symbol was given.')
+      }, 'The instanceof assertion needs a constructor but Symbol was given.')
 
       expectError(function () {
         var FakeConstructor = {}
@@ -251,11 +251,11 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), 1 as any, 'blah')
-    }, 'blah: The instanceof assertion needs a constructor but number was given.')
+    }, 'blah: The instanceof assertion needs a constructor but Number was given.')
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), 'batman' as any)
-    }, 'The instanceof assertion needs a constructor but string was given.')
+    }, 'The instanceof assertion needs a constructor but String was given.')
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), {} as any)
@@ -263,7 +263,7 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), true as any)
-    }, 'The instanceof assertion needs a constructor but boolean was given.')
+    }, 'The instanceof assertion needs a constructor but Boolean was given.')
 
     expectError(function () {
       assert.notInstanceOf(new Foo(), null as any)
@@ -276,7 +276,7 @@ test.describe('assert', function () {
     if (typeof Symbol !== 'undefined' && typeof Symbol.hasInstance !== 'undefined') {
       expectError(function () {
         assert.notInstanceOf(new Foo(), Symbol() as any)
-      }, 'The instanceof assertion needs a constructor but symbol was given.')
+      }, 'The instanceof assertion needs a constructor but Symbol was given.')
 
       expectError(function () {
         var FakeConstructor = {}
@@ -593,7 +593,7 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.isFunction({}, 'blah')
-    }, 'blah: expected {} to be a function')
+    }, 'blah: expected {} to be a callable function')
   })
 
   test('isNotFunction', function () {
@@ -602,7 +602,7 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.isNotFunction(function () {}, 'blah')
-    }, 'blah: expected [Function] not to be a function')
+    }, 'blah: expected [Function] not to be a callable function')
   })
 
   test('isArray', function () {
@@ -1674,13 +1674,13 @@ test.describe('assert', function () {
       await assert.rejects(async function () {
         throw new Error('foo')
       }, TypeError)
-    }, 'expected [Function] to throw [Function TypeError] but Error: foo was thrown')
+    }, 'expected [AsyncFunction] to throw [Function TypeError] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {
         throw new Error('foo')
       }, 'bar')
-    }, `expected [Function] to throw error including 'bar' but got 'foo'`)
+    }, `expected [AsyncFunction] to throw error including 'bar' but got 'foo'`)
 
     await expectAsyncError(async function () {
       await assert.rejects(
@@ -1691,7 +1691,7 @@ test.describe('assert', function () {
         'bar',
         'blah'
       )
-    }, "blah: expected [Function] to throw error including 'bar' but got 'foo'")
+    }, "blah: expected [AsyncFunction] to throw error including 'bar' but got 'foo'")
 
     await expectAsyncError(async function () {
       await assert.rejects(
@@ -1702,23 +1702,23 @@ test.describe('assert', function () {
         'bar',
         'blah'
       )
-    }, 'blah: expected [Function] to throw [Function TypeError] but Error: foo was thrown')
+    }, 'blah: expected [AsyncFunction] to throw [Function TypeError] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {})
-    }, 'expected [Function] to throw an error')
+    }, 'expected [AsyncFunction] to throw an error')
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {
         throw new Error('')
       }, 'bar')
-    }, "expected [Function] to throw error including 'bar' but got ''")
+    }, "expected [AsyncFunction] to throw error including 'bar' but got ''")
 
     await expectAsyncError(async function () {
       await assert.rejects(async function () {
         throw new Error('')
       }, /bar/)
-    }, "expected [Function] to throw error matching /bar/ but got ''")
+    }, "expected [AsyncFunction] to throw error matching /bar/ but got ''")
 
     await expectAsyncError(async function () {
       await assert.rejects({} as any)
@@ -1736,23 +1736,23 @@ test.describe('assert', function () {
       name = 'CustomError'
     }
 
-    assert.doesNotThrows(function () {})
-    assert.doesNotThrows(function () {}, 'foo')
-    assert.doesNotThrows(function () {}, '')
+    assert.doesNotThrow(function () {})
+    assert.doesNotThrow(function () {}, 'foo')
+    assert.doesNotThrow(function () {}, '')
 
-    assert.doesNotThrows(function () {
+    assert.doesNotThrow(function () {
       throw new Error('This is a message')
     }, TypeError)
 
-    assert.doesNotThrows(function () {
+    assert.doesNotThrow(function () {
       throw new Error('This is a message')
     }, 'Another message')
 
-    assert.doesNotThrows(function () {
+    assert.doesNotThrow(function () {
       throw new Error('This is a message')
     }, /Another message/)
 
-    assert.doesNotThrows(
+    assert.doesNotThrow(
       function () {
         throw new Error('This is a message')
       },
@@ -1760,7 +1760,7 @@ test.describe('assert', function () {
       'Another message'
     )
 
-    assert.doesNotThrows(
+    assert.doesNotThrow(
       function () {
         throw new Error('This is a message')
       },
@@ -1768,7 +1768,7 @@ test.describe('assert', function () {
       /Another message/
     )
 
-    assert.doesNotThrows(
+    assert.doesNotThrow(
       function () {
         throw new Error('This is a message')
       },
@@ -1776,7 +1776,7 @@ test.describe('assert', function () {
       'Another message'
     )
 
-    assert.doesNotThrows(
+    assert.doesNotThrow(
       function () {
         throw new Error('This is a message')
       },
@@ -1785,43 +1785,43 @@ test.describe('assert', function () {
     )
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new Error('foo')
       })
     }, "expected [Function] to not throw an error but 'Error: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new CustomError('foo')
       })
     }, "expected [Function] to not throw an error but 'CustomError: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new Error('foo')
       }, Error)
     }, "expected [Function] to not throw 'Error' but 'Error: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new CustomError('foo')
       }, CustomError as any)
     }, "expected [Function] to not throw 'CustomError' but 'CustomError: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new Error('foo')
       }, 'foo')
     }, "expected [Function] to throw error not including 'foo'")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new Error('foo')
       }, /foo/)
     }, 'expected [Function] to throw error not matching /foo/')
 
     expectError(function () {
-      assert.doesNotThrows(
+      assert.doesNotThrow(
         function () {
           throw new Error('foo')
         },
@@ -1832,7 +1832,7 @@ test.describe('assert', function () {
     }, "blah: expected [Function] to not throw 'Error' but 'Error: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(
+      assert.doesNotThrow(
         function () {
           throw new CustomError('foo')
         },
@@ -1843,13 +1843,13 @@ test.describe('assert', function () {
     }, "blah: expected [Function] to not throw 'CustomError' but 'CustomError: foo' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows(function () {
+      assert.doesNotThrow(function () {
         throw new Error('')
       }, '')
     }, "expected [Function] to throw error not including ''")
 
     expectError(function () {
-      assert.doesNotThrows(
+      assert.doesNotThrow(
         function () {
           throw new Error('')
         },
@@ -1859,38 +1859,38 @@ test.describe('assert', function () {
     }, "expected [Function] to not throw 'Error' but 'Error' was thrown")
 
     expectError(function () {
-      assert.doesNotThrows({} as any)
+      assert.doesNotThrow({} as any)
     }, 'expected {} to be a function')
 
     expectError(function () {
-      assert.doesNotThrows({} as any, Error, '', 'blah')
+      assert.doesNotThrow({} as any, Error, '', 'blah')
     }, 'blah: expected {} to be a function')
   })
 
-  test('doesNotRejects', async function () {
+  test('doesNotReject', async function () {
     const assert = new Assert()
 
     class CustomError extends Error {
       name = 'CustomError'
     }
 
-    await assert.doesNotRejects(async function () {})
-    await assert.doesNotRejects(async function () {}, 'foo')
-    await assert.doesNotRejects(async function () {}, '')
+    await assert.doesNotReject(async function () {})
+    await assert.doesNotReject(async function () {}, 'foo')
+    await assert.doesNotReject(async function () {}, '')
 
-    await assert.doesNotRejects(async function () {
+    await assert.doesNotReject(async function () {
       throw new Error('This is a message')
     }, TypeError)
 
-    await assert.doesNotRejects(async function () {
+    await assert.doesNotReject(async function () {
       throw new Error('This is a message')
     }, 'Another message')
 
-    await assert.doesNotRejects(async function () {
+    await assert.doesNotReject(async function () {
       throw new Error('This is a message')
     }, /Another message/)
 
-    await assert.doesNotRejects(
+    await assert.doesNotReject(
       async function () {
         throw new Error('This is a message')
       },
@@ -1898,7 +1898,7 @@ test.describe('assert', function () {
       'Another message'
     )
 
-    await assert.doesNotRejects(
+    await assert.doesNotReject(
       async function () {
         throw new Error('This is a message')
       },
@@ -1906,7 +1906,7 @@ test.describe('assert', function () {
       /Another message/
     )
 
-    await assert.doesNotRejects(
+    await assert.doesNotReject(
       async function () {
         throw new Error('This is a message')
       },
@@ -1914,7 +1914,7 @@ test.describe('assert', function () {
       'Another message'
     )
 
-    await assert.doesNotRejects(
+    await assert.doesNotReject(
       async function () {
         throw new Error('This is a message')
       },
@@ -1923,43 +1923,43 @@ test.describe('assert', function () {
     )
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new Error('foo')
       })
-    }, 'expected [Function] to not throw an error but Error: foo was thrown')
+    }, 'expected [AsyncFunction] to not throw an error but Error: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new CustomError('foo')
       })
-    }, 'expected [Function] to not throw an error but CustomError: foo was thrown')
+    }, 'expected [AsyncFunction] to not throw an error but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new Error('foo')
       }, Error)
-    }, 'expected [Function] to not throw [Function Error] but Error: foo was thrown')
+    }, 'expected [AsyncFunction] to not throw [Function Error] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new CustomError('foo')
       }, CustomError as any)
-    }, 'expected [Function] to not throw [Function CustomError] but CustomError: foo was thrown')
+    }, 'expected [AsyncFunction] to not throw [Function CustomError] but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new Error('foo')
       }, 'foo')
-    }, "expected [Function] to throw error not including 'foo'")
+    }, "expected [AsyncFunction] to throw error not including 'foo'")
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new Error('foo')
       }, /foo/)
-    }, 'expected [Function] to throw error not matching /foo/')
+    }, 'expected [AsyncFunction] to throw error not matching /foo/')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(
+      await assert.doesNotReject(
         async function () {
           throw new Error('foo')
         },
@@ -1967,10 +1967,10 @@ test.describe('assert', function () {
         'foo',
         'blah'
       )
-    }, 'blah: expected [Function] to not throw [Function Error] but Error: foo was thrown')
+    }, 'blah: expected [AsyncFunction] to not throw [Function Error] but Error: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(
+      await assert.doesNotReject(
         async function () {
           throw new CustomError('foo')
         },
@@ -1978,30 +1978,30 @@ test.describe('assert', function () {
         'foo',
         'blah'
       )
-    }, 'blah: expected [Function] to not throw [Function CustomError] but CustomError: foo was thrown')
+    }, 'blah: expected [AsyncFunction] to not throw [Function CustomError] but CustomError: foo was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(async function () {
+      await assert.doesNotReject(async function () {
         throw new Error('')
       }, '')
-    }, 'expected [Function] to not throw an error but Error was thrown')
+    }, 'expected [AsyncFunction] to not throw an error but Error was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects(
+      await assert.doesNotReject(
         async function () {
           throw new Error('')
         },
         Error,
         ''
       )
-    }, 'expected [Function] to not throw [Function Error] but Error was thrown')
+    }, 'expected [AsyncFunction] to not throw [Function Error] but Error was thrown')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects({} as any)
+      await assert.doesNotReject({} as any)
     }, 'expected {} to be a function')
 
     await expectAsyncError(async function () {
-      await assert.doesNotRejects({} as any, Error, '', 'blah')
+      await assert.doesNotReject({} as any, Error, '', 'blah')
     }, 'blah: expected {} to be a function')
   })
 
@@ -2092,11 +2092,11 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.sameMembers({} as any, [], 'blah')
-    }, 'blah: expected {} to be an array')
+    }, 'blah: expected {} to be an iterable')
 
     expectError(function () {
       assert.sameMembers([], {} as any, 'blah')
-    }, 'blah: expected {} to be an array')
+    }, 'blah: expected {} to be an iterable')
   })
 
   test('notSameMembers', function () {
