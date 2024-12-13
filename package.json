@@ -60,7 +60,6 @@
   "dependencies": {
     "@poppinss/macroable": "^1.0.2",
     "@types/chai": "^4.3.14",
-    "api-contract-validator": "^2.2.8",
     "chai": "^5.1.0"
   },
   "peerDependencies": {

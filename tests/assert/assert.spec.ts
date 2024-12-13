@@ -2023,19 +2023,19 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.closeTo([1.5] as any, 1.0, 0.5, 'blah')
-    }, 'blah: expected [ 1.5 ] to be a number')
+    }, 'blah: expected [ 1.5 ] to be numeric')
 
     expectError(function () {
       assert.closeTo(1.5, '1.0' as any, 0.5, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers')
+    }, "blah: expected '1.0' to be numeric")
 
     expectError(function () {
       assert.closeTo(1.5, 1.0, true as any, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers')
+    }, 'blah: expected true to be numeric')
 
     expectError(function () {
       assert.closeTo(1.5, 1.0, undefined as any, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers, and a delta is required')
+    }, 'blah: A `delta` value is required for `closeTo`')
   })
 
   test('approximately', function () {
@@ -2055,19 +2055,19 @@ test.describe('assert', function () {
 
     expectError(function () {
       assert.approximately([1.5] as any, 1.0, 0.5)
-    }, 'expected [ 1.5 ] to be a number')
+    }, 'expected [ 1.5 ] to be numeric')
 
     expectError(function () {
       assert.approximately(1.5, '1.0' as any, 0.5, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers')
+    }, "blah: expected '1.0' to be numeric")
 
     expectError(function () {
       assert.approximately(1.5, 1.0, true as any, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers')
+    }, 'blah: expected true to be numeric')
 
     expectError(function () {
       assert.approximately(1.5, 1.0, undefined as any, 'blah')
-    }, 'blah: the arguments to closeTo or approximately must be numbers, and a delta is required')
+    }, 'blah: A `delta` value is required for `closeTo`')
   })
 
   test('sameMembers', function () {

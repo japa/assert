@@ -7,10 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { fileURLToPath } from 'node:url'
 import Macroable from '@poppinss/macroable'
-import { chaiPlugin } from 'api-contract-validator'
-import { assert, Assertion, AssertionError, use, expect } from 'chai'
+import { assert, Assertion, AssertionError } from 'chai'
 
 import { subsetCompare } from './utils.js'
 import type { AssertContract, ChaiAssert } from './types.js'
@@ -27,23 +25,6 @@ import type { AssertContract, ChaiAssert } from './types.js'
  * assert.deepEqual({ id: 1 }, { id: 1 })
  */
 export class Assert extends Macroable implements AssertContract {
-  protected static hasInstalledApiValidator = false
-
-  /**
-   * Register api specs to be used for validating responses
-   */
-  static registerApiSpecs(
-    schemaPathsOrURLs: (string | URL)[],
-    options?: { reportCoverage?: boolean; exportCoverage?: boolean }
-  ) {
-    this.hasInstalledApiValidator = true
-    const paths = schemaPathsOrURLs.map((schemaPathsOrURL) => {
-      return schemaPathsOrURL instanceof URL ? fileURLToPath(schemaPathsOrURL) : schemaPathsOrURL
-    })
-
-    use(chaiPlugin({ apiDefinitionsPath: paths, ...options }))
-  }
-
   /**
    * Tracking assertions
    */
@@ -1534,12 +1515,10 @@ export class Assert extends Macroable implements AssertContract {
    * ) // fails
    */
   notIncludeDeepMembers(
-    ...args: Parameters<ChaiAssert['includeDeepMembers']>
-  ): ReturnType<ChaiAssert['includeDeepMembers']> {
+    ...args: Parameters<ChaiAssert['notIncludeDeepMembers']>
+  ): ReturnType<ChaiAssert['notIncludeDeepMembers']> {
     this.incrementAssertionsCount()
-
-    // @ts-expect-error not in @types/chai
-    return assert['notIncludeDeepMembers'](...args)
+    return assert.notIncludeDeepMembers(...args)
   }
 
   /**
@@ -2173,15 +2152,4 @@ export class Assert extends Macroable implements AssertContract {
    * Use {@link Assert.doesNotReject} without the "s"
    */
   doesNotRejects = this.doesNotReject.bind(this)
-
-  /**
-   * Assert the response confirms to open API spec
-   */
-  isValidApiResponse(response: any) {
-    // @ts-ignore
-    if (!this.constructor['hasInstalledApiValidator']) {
-      throw new Error('Cannot validate responses without defining api schemas')
-    }
-    return expect(response).to.matchApiSchema()
-  }
 }
