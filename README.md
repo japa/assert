@@ -36,28 +36,6 @@ test('test title', ({ assert }) => {
 })
 ```
 
-## Register open API schemas
-You can register open API schema and then assert HTTP responses against.
-
-```ts
-configure({
-  plugins: [assert({
-    openApi: {
-      schemas: [new URL('../api-spec.json', import.meta.url)]
-    }
-  })]
-})
-```
-
-Validate response as follows.
-
-```ts
-test('get users', ({ assert }) => {
-  const response = await supertest(baseUrl).get('/users')
-  assert.isValidApiResponse(response)
-})
-```
-
 [github-actions-url]: https://github.com/japa/assert/actions/workflows/checks.yml
 [github-actions-image]: https://img.shields.io/github/actions/workflow/status/japa/assert/checks.yml?style=for-the-badge "github-actions"
 

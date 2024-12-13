@@ -22,14 +22,7 @@ declare module '@japa/runner/core' {
 /**
  * Plugin for "@japa/runner"
  */
-export function assert(options?: PluginConfig): PluginFn {
-  if (options?.openApi) {
-    Assert.registerApiSpecs(options.openApi.schemas, {
-      exportCoverage: options.openApi.exportCoverage,
-      reportCoverage: options.openApi.reportCoverage,
-    })
-  }
-
+export function assert(_options?: PluginConfig): PluginFn {
   return function () {
     TestContext.getter('assert', () => new Assert(), true)
     Test.executed(function (test: Test<any>, hasError) {
