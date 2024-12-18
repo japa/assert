@@ -9,6 +9,7 @@
 
 import * as chai from 'chai'
 import { ErrorsPrinter } from '@japa/errors-printer'
+import { AssertionError } from 'assertion-error'
 
 export async function wrapAssertions(fn: () => void | Promise<void>) {
   try {
@@ -42,10 +43,10 @@ export function expectError(fn: any, val?: any) {
         })
     }
 
-    throw new chai.AssertionError('Invalid val')
+    throw new AssertionError('Invalid val')
   }
 
-  throw new chai.AssertionError('Expected an error')
+  throw new AssertionError('Expected an error')
 }
 
 /**
@@ -71,8 +72,8 @@ export async function expectAsyncError(fn: any, val?: any) {
         })
     }
 
-    throw new chai.AssertionError('Invalid val')
+    throw new AssertionError('Invalid val')
   }
 
-  throw new chai.AssertionError('Expected an error')
+  throw new AssertionError('Expected an error')
 }

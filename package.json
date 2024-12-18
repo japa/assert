@@ -29,7 +29,7 @@
     "version": "npm run build",
     "prepublishOnly": "npm run build",
     "release": "release-it",
-    "quick:test": "node --import=ts-node-maintained/register/esm --enable-source-maps bin/test.ts"
+    "quick:test": "node --import=ts-node-maintained/register/esm --enable-source-maps --test \"tests/**/*.spec.ts\""
   },
   "devDependencies": {
     "@adonisjs/eslint-config": "^2.0.0-beta.7",
@@ -56,6 +56,7 @@
   "dependencies": {
     "@poppinss/macroable": "^1.0.3",
     "@types/chai": "^5.0.1",
+    "assertion-error": "^2.0.1",
     "chai": "^5.1.2"
   },
   "peerDependencies": {

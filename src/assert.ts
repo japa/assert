@@ -7,8 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import { assert, Assertion } from 'chai'
 import Macroable from '@poppinss/macroable'
-import { assert, Assertion, AssertionError } from 'chai'
+import { AssertionError } from 'assertion-error'
 
 import { subsetCompare } from './utils.js'
 import type { AssertContract, ChaiAssert } from './types.js'
