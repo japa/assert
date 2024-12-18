@@ -29,7 +29,7 @@
     "version": "npm run build",
     "prepublishOnly": "npm run build",
     "release": "release-it",
-    "quick:test": "node --import=ts-node-maintained/register/esm --enable-source-maps --test \"tests/**/*.spec.ts\""
+    "quick:test": "glob -c \"node --import=ts-node-maintained/register/esm --enable-source-maps --test\" \"tests/**/*.spec.ts\""
   },
   "devDependencies": {
     "@adonisjs/eslint-config": "^2.0.0-beta.7",
