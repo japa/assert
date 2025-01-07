@@ -13,7 +13,7 @@ import { TestContext, Test, Emitter, Refiner } from '@japa/runner/core'
 
 import { assert } from '../index.js'
 import { Assert } from '../src/assert.js'
-import { wrapAssertions } from '../tests_helpers/index.js'
+import { wrapAssertions } from './helpers.js'
 
 test.describe('Plugin', () => {
   test('add assert property to test context', async () => {

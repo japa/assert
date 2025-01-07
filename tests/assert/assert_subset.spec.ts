@@ -9,7 +9,7 @@
 
 import { before, test } from 'node:test'
 import { Assert } from '../../src/assert.js'
-import { expectError } from '../../tests_helpers/index.js'
+import { expectError } from '../helpers.js'
 
 /**
  * Tests are copied from https://raw.githubusercontent.com/debitoor/chai-subset/master/test/unit/chai-subset.spec.js.

@@ -12,7 +12,7 @@
 import { test } from 'node:test'
 import { DateTime } from 'luxon'
 import { Assert } from '../../src/assert.js'
-import { expectError, expectAsyncError } from '../../tests_helpers/index.js'
+import { expectError, expectAsyncError } from '../helpers.js'
 
 /**
  * Tests in this file is a copy of

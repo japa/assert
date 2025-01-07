@@ -8,8 +8,8 @@
  */
 
 import * as chai from 'chai'
-import { ErrorsPrinter } from '@japa/errors-printer'
 import { AssertionError } from 'assertion-error'
+import { ErrorsPrinter } from '@japa/errors-printer'
 
 export async function wrapAssertions(fn: () => void | Promise<void>) {
   try {
