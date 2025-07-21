@@ -11,7 +11,6 @@ import { assert, Assertion } from 'chai'
 import Macroable from '@poppinss/macroable'
 import { AssertionError } from 'assertion-error'
 
-import { subsetCompare } from './utils.js'
 import type { AssertContract, ChaiAssert } from './types.js'
 
 /**
@@ -1817,6 +1816,53 @@ export class Assert extends Macroable implements AssertContract {
    * value. Useful for testing API responses.
    *
    * @example
+   * assert.containSubset(
+   *   { id: 1, created_at: Date },
+   *   { id: 1 }
+   * ) // passes
+   *
+   * assert.containSubset(
+   *   [
+   *     { id: 1, created_at: Date },
+   *     { id: 2, created_at: Date }
+   *   ],
+   *   [{ id: 1 }, { id: 2 }]
+   * ) // passes
+   */
+  containSubset(haystack: any, needle: any, message?: string) {
+    this.incrementAssertionsCount()
+    return assert.containSubset(haystack, needle, message)
+  }
+
+  /**
+   * Assert an array or an object does not contain a subset of the
+   * expected value. Useful for testing API responses.
+   *
+   * @example
+   * assert.doesNotContainSubset(
+   *   { id: 1, created_at: Date },
+   *   { name: 'foo' }
+   * ) // passes
+   *
+   * assert.doesNotContainSubset(
+   *   [
+   *     { id: 1, created_at: Date },
+   *     { id: 2, created_at: Date }
+   *   ],
+   *   [{ name: 'foo' }, { id: 2 }]
+   * ) // passes
+   */
+  doesNotContainSubset(haystack: any, needle: any, message?: string) {
+    this.incrementAssertionsCount()
+    return assert.doesNotContainSubset(haystack, needle, message)
+  }
+
+  /**
+   * Assert an array or an object to contain a subset of the expected
+   * value. Useful for testing API responses.
+   *
+   * @deprecated Instead use "containSubset"
+   * @example
    * assert.containsSubset(
    *   { id: 1, created_at: Date },
    *   { id: 1 }
@@ -1831,19 +1877,14 @@ export class Assert extends Macroable implements AssertContract {
    * ) // passes
    */
   containsSubset(haystack: any, needle: any, message?: string) {
-    this.incrementAssertionsCount()
-    this.evaluate(subsetCompare(needle, haystack), 'expected #{act} to contain subset #{exp}', {
-      expected: needle,
-      actual: haystack,
-      operator: 'containsSubset',
-      prefix: message,
-    })
+    return this.containSubset(haystack, needle, message)
   }
 
   /**
    * Assert an array or an object to not contain a subset of the expected
    * value.
    *
+   * @deprecated Instead use "doesNotContainSubset"
    * @example
    * assert.notContainsSubset(
    *   { id: 1, created_at: Date },
@@ -1851,17 +1892,7 @@ export class Assert extends Macroable implements AssertContract {
    * ) // passes
    */
   notContainsSubset(haystack: any, needle: any, message?: string) {
-    this.incrementAssertionsCount()
-    this.evaluate(
-      !subsetCompare(needle, haystack),
-      'expected #{act} to not contain subset #{exp}',
-      {
-        expected: needle,
-        actual: haystack,
-        operator: 'notContainsSubset',
-        prefix: message,
-      }
-    )
+    return this.doesNotContainSubset(haystack, needle, message)
   }
 
   /**
