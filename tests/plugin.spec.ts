@@ -127,4 +127,34 @@ test.describe('Plugin', () => {
     testInstance.exec()
     testInstance1.exec()
   })
+
+  test('do not validate assertions when test is marked as a regression test', (_, done) => {
+    let testsCount = 0
+    const emitter = new Emitter()
+    const refiner = new Refiner()
+    const getContext = (t: Test<any>) => new TestContext(t)
+
+    const testInstance = new Test('test 1', getContext, emitter, refiner)
+    testInstance
+      .run(async (ctx) => {
+        ctx['assert'].plan(2)
+        ctx['assert'].equal(false, true)
+        ctx['assert'].equal(true, true)
+      })
+      .fails()
+
+    emitter.on('test:end', (payload) => {
+      testsCount++
+      try {
+        chaiAssert.isTrue(payload.isFailing)
+        chaiAssert.isFalse(payload.hasError)
+        chaiAssert.lengthOf(payload.errors, 0)
+        done()
+      } catch (error) {
+        done(error)
+      }
+    })
+
+    testInstance.exec()
+  })
 })

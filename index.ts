@@ -26,6 +26,13 @@ export function assert(_options?: PluginConfig): PluginFn {
   return function () {
     TestContext.getter('assert', () => new Assert(), true)
     Test.executed(function (test: Test<any>, hasError) {
+      /**
+       * Do not evaluate assertions counts for regression tests.
+       */
+      if (test.options.isFailing) {
+        return
+      }
+
       if (!hasError) {
         test.context?.assert.assertions.validate()
       }
