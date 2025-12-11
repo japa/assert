@@ -75,3 +75,9 @@ export type AssertContract = Omit<
 >
 
 export type PluginConfig = {}
+
+/**
+ * A more flexible error constructor than `ErrorConstructor` type that allows custom
+ * error classes with any constructor signature
+ */
+export type AnyErrorConstructor = new (...args: any[]) => Error

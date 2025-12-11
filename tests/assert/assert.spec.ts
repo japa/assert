@@ -1634,6 +1634,37 @@ test.describe('assert', function () {
     }, 'blah: expected {} to be a function')
   })
 
+  test('throws with custom error constructor with multiple arguments', function () {
+    const assert = new Assert()
+
+    class CustomError extends Error {
+      constructor(
+        public code: number,
+        message: string
+      ) {
+        super(message)
+      }
+    }
+
+    assert.throws(() => {
+      throw new CustomError(500, 'Internal Server Error')
+    }, CustomError)
+
+    assert.throws(
+      () => {
+        throw new CustomError(404, 'Not Found')
+      },
+      CustomError,
+      'Not Found'
+    )
+
+    expectError(() => {
+      assert.throws(() => {
+        throw new CustomError(500, 'Internal Server Error')
+      }, TypeError)
+    }, "expected [Function] to throw 'TypeError' but 'Error: Internal Server Error' was thrown")
+  })
+
   test('rejects', async function () {
     const assert = new Assert()
 
@@ -1727,6 +1758,42 @@ test.describe('assert', function () {
     await expectAsyncError(async function () {
       await assert.rejects({} as any, Error, 'testing', 'blah')
     }, 'blah: expected {} to be a function')
+  })
+
+  test('rejects with custom error constructor with multiple arguments', async function () {
+    const assert = new Assert()
+
+    class CustomError extends Error {
+      constructor(
+        public code: number,
+        message: string
+      ) {
+        super(message)
+      }
+    }
+
+    await assert.rejects(async function () {
+      throw new CustomError(500, 'Internal Server Error')
+    }, CustomError)
+
+    await assert.rejects(
+      async function () {
+        throw new CustomError(404, 'Not Found')
+      },
+      CustomError,
+      'Not Found'
+    )
+  })
+
+  test('rejects with function returning non-void value', async function () {
+    const assert = new Assert()
+
+    async function myThing(): Promise<string> {
+      throw new Error('Something went wrong')
+    }
+
+    await assert.rejects(() => myThing(), Error)
+    await assert.rejects(() => myThing(), 'Something went wrong')
   })
 
   test('doesNotThrows', function () {

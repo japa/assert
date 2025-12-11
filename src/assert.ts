@@ -11,7 +11,7 @@ import { assert, Assertion } from 'chai'
 import Macroable from '@poppinss/macroable'
 import { AssertionError } from 'assertion-error'
 
-import type { AssertContract, ChaiAssert } from './types.js'
+import type { AnyErrorConstructor, AssertContract, ChaiAssert } from './types.js'
 
 /**
  * The Assert class is derived from chai.assert to allow support
@@ -1170,16 +1170,16 @@ export class Assert extends Macroable implements AssertContract {
    * assert.throws(foo, 'failed') // fails
    */
   throws(fn: () => void, message?: string): void
-  throws(fn: () => void, errType: RegExp | ErrorConstructor, message?: string): void
+  throws(fn: () => void, errType: RegExp | AnyErrorConstructor, message?: string): void
   throws(
     fn: () => void,
-    constructor: ErrorConstructor,
+    constructor: AnyErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): void
   throws(
     fn: () => void,
-    errType?: RegExp | ErrorConstructor | string,
+    errType?: RegExp | AnyErrorConstructor | string,
     regExp?: RegExp | string,
     message?: string
   ): void {
@@ -1203,16 +1203,16 @@ export class Assert extends Macroable implements AssertContract {
    */
   doesNotThrow(fn: () => void, message?: string): void
   doesNotThrow(fn: () => void, regExp: RegExp): void
-  doesNotThrow(fn: () => void, constructor: ErrorConstructor, message?: string): void
+  doesNotThrow(fn: () => void, constructor: AnyErrorConstructor, message?: string): void
   doesNotThrow(
     fn: () => void,
-    constructor: ErrorConstructor,
+    constructor: AnyErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): void
   doesNotThrow(
     fn: () => void,
-    errType?: RegExp | ErrorConstructor | string,
+    errType?: RegExp | AnyErrorConstructor | string,
     regExp?: RegExp | string,
     message?: string
   ): void {
@@ -1919,18 +1919,18 @@ export class Assert extends Macroable implements AssertContract {
   async rejects(fn: () => void, message?: string): Promise<void>
   async rejects(
     fn: () => void | Promise<void>,
-    errType: RegExp | ErrorConstructor,
+    errType: RegExp | AnyErrorConstructor,
     message?: string
   ): Promise<void>
   async rejects(
     fn: () => void | Promise<void>,
-    constructor: ErrorConstructor,
+    constructor: AnyErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): Promise<void>
   async rejects(
     fn: () => void | Promise<void>,
-    errType?: RegExp | ErrorConstructor | string,
+    errType?: RegExp | AnyErrorConstructor | string,
     regExp?: RegExp | string,
     message?: string
   ): Promise<void> {
@@ -2059,18 +2059,18 @@ export class Assert extends Macroable implements AssertContract {
   async doesNotReject(fn: () => void, message?: string): Promise<void>
   async doesNotReject(
     fn: () => void | Promise<void>,
-    errType: RegExp | ErrorConstructor,
+    errType: RegExp | AnyErrorConstructor,
     message?: string
   ): Promise<void>
   async doesNotReject(
     fn: () => void | Promise<void>,
-    constructor: ErrorConstructor,
+    constructor: AnyErrorConstructor,
     regExp: RegExp | string,
     message?: string
   ): Promise<void>
   async doesNotReject(
     fn: () => void | Promise<void>,
-    errType?: RegExp | ErrorConstructor | string,
+    errType?: RegExp | AnyErrorConstructor | string,
     regExp?: RegExp | string,
     message?: string
   ): Promise<void> {
