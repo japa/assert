@@ -1665,6 +1665,17 @@ test.describe('assert', function () {
     }, "expected [Function] to throw 'TypeError' but 'Error: Internal Server Error' was thrown")
   })
 
+  test('throws with function returning non-void value', function () {
+    const assert = new Assert()
+
+    function myThing(): string {
+      throw new Error('Something went wrong')
+    }
+
+    assert.throws(() => myThing(), Error)
+    assert.throws(() => myThing(), 'Something went wrong')
+  })
+
   test('rejects', async function () {
     const assert = new Assert()
 
