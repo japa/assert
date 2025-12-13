@@ -57,7 +57,7 @@
     "chai": "^6.2.1"
   },
   "peerDependencies": {
-    "@japa/runner": "^3.1.2 || ^4.0.0"
+    "@japa/runner": "^3.1.2 || ^4.0.0 || ^5.0.0"
   },
   "homepage": "https://github.com/japa/assert#readme",
   "repository": {
