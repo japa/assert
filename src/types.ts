@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { assert } from 'chai'
+import { type assert } from 'chai'
 
 /**
  * Unnecessary similar methods have been removed
